@@ -1,6 +1,14 @@
 import { EllipsisVertical } from "lucide-react";
 import React, { useState } from "react";
-
+import * as Accordion from "@radix-ui/react-accordion";
+type Props = {
+	task: string;
+	type: string;
+	duration: number;
+	time: number;
+	importance: string;
+	percentage: number;
+};
 export default function Taskcard({
 	task,
 	type,
@@ -8,7 +16,7 @@ export default function Taskcard({
 	time,
 	importance,
 	percentage,
-}) {
+}: Props) {
 	const [per, setpercentage] = useState("0");
 	const [start, setStart] = useState(false);
 	const importance_map = {
@@ -16,10 +24,11 @@ export default function Taskcard({
 		2: "#FAF4BE",
 		3: "#D4EDFB",
 	};
+
 	const type_map = {
-		strength: "",
-		money: "bg-[#FAF4BE]",
-		Intelect: "bg-[#D4EDFB]",
+		strength: "strength-outline.png",
+		money: "money-outline.png",
+		brain: "brain-outline.png",
 	};
 
 	const per_colors = {
@@ -31,13 +40,14 @@ export default function Taskcard({
 	return (
 		<>
 			<div
-				className={`flex border-2 rounded-lg p-2 pe-0 m-4 ${`bg-[${importance_map[importance]}]`}`}
+				className={`group flex border-2 rounded-lg p-2 pe-0 m-4 ${`bg-[${importance_map[importance]}]`}`}
+				style={{ backgroundColor: importance_map[importance] }}
 			>
-				<div className="flex gap-1">
+				<div className="flex justify-between w-full">
 					<div className="flex gap-4">
 						<div className="borde flex flex-col justify-center">
 							<img
-								src="icons/strength-outline.png"
+								src={`icons/${type_map[type]}`}
 								alt="muscle"
 								className="w-9 h-9"
 							/>
@@ -99,18 +109,18 @@ export default function Taskcard({
 								/>
 							)}
 						</button>
+						<button type="button" className="flex items-center">
+							<EllipsisVertical color="#BCBCBC" size={"25"} className="w-fit" />
+						</button>
 					</div>
 				</div>
-				<button type="button" className="flex items-center">
-					<EllipsisVertical color="#BCBCBC" size={"25"} className="w-fit" />
-				</button>
 			</div>
 			<input
 				type="range"
 				min="0"
 				max="100"
 				value={per}
-				className="slider"
+				className="slider w-40 ms-10"
 				id="mySlider"
 				onChange={(event) => {
 					setpercentage(event.target.value);
