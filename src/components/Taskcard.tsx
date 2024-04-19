@@ -1,6 +1,8 @@
 import { EllipsisVertical } from "lucide-react";
 import React, { useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
+import Meter from "./Meter";
+
 type Props = {
 	task: string;
 	type: string;
@@ -40,7 +42,7 @@ export default function Taskcard({
 	return (
 		<>
 			<div
-				className={`group flex border-2 rounded-lg p-2 pe-0 m-4 ${`bg-[${importance_map[importance]}]`}`}
+				className="group flex border-2 rounded-lg p-2 pe-0 m-4"
 				style={{ backgroundColor: importance_map[importance] }}
 			>
 				<div className="flex justify-between w-full">
@@ -77,38 +79,15 @@ export default function Taskcard({
 								{per}%
 							</div>
 						</div>
-						<button
-							className="w-9 h-9 rounded-full flex justify-center items-center"
-							style={{
-								background: `radial-gradient(closest-side, ${
-									importance_map[importance]
-								} 70%, transparent 80% 100%),conic-gradient(${
-									Number(per) >= 75
-										? per_colors.excelent
-										: Number(per) >= 30
-											? per_colors.good
-											: per_colors.bad
-								} ${per}%, ${importance_map[importance]} 0)`,
-							}}
-							type="button"
-							onClick={() => {
-								setStart(!start);
-							}}
-						>
-							{start ? (
+						<Meter percentage={per} importance={importance} size={33} gap={0} conincStart={70}>
+							<button type="button" onClick={()=>setStart(!start)}>
 								<img
-									src="icons/play-red.png"
-									alt=""
-									className="w-7 h-7 m-auto"
+								src={`icons/${start?"play-red":"pause-yellow"}.png`}
+								alt=""
+								className="w-7 h-7 rounded-full"
 								/>
-							) : (
-								<img
-									src="icons/pause-yellow.png"
-									alt=""
-									className="w-7 h-7 m-auto"
-								/>
-							)}
-						</button>
+							</button>
+						</Meter>
 						<button type="button" className="flex items-center">
 							<EllipsisVertical color="#BCBCBC" size={"25"} className="w-fit" />
 						</button>

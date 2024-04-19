@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { EllipsisVertical } from "lucide-react";
+import Meter from "./Meter";
+import TypeFiller from "./TypeFiller";
 
 type Props = {
 	deadline: number;
@@ -54,45 +56,15 @@ export default function GoalCard({
 					</div>
 				</div>
 				<div className="flex gap-1 items-center">
-					<div
-						className="w-16 h-16 rounded-full flex justify-center items-center"
-						style={{
-							background: `radial-gradient(closest-side, ${
-								importance_map[importance]
-							} 85%, transparent 90% 100%),conic-gradient(${
-								Number(per) >= 75
-									? per_colors.excelent
-									: Number(per) >= 30
-										? per_colors.good
-										: per_colors.bad
-							} ${per}%, ${importance_map[importance]} 0)`,
-						}}
-					>
-						<div>
-							<div className="w-11 hidden group-hover:block">
-								<div
-									className="text-center"
-									style={{
-										color:
-											Number(per) >= 75
-												? per_colors.excelent
-												: Number(per) >= 30
-													? per_colors.good
-													: per_colors.bad,
-									}}
-								>
-									<span>{per}%</span>
-								</div>
-							</div>
-							<div className="flex flex-col justify-center  group-hover:hidden">
-								<img
-									src={`icons/${type_map[type]}`}
-									alt="muscle"
-									className="w-9 h-9"
-								/>
-							</div>
-						</div>
-					</div>
+				<Meter
+					percentage={per}
+					importance={importance}
+					size={65}
+					gap={12}
+					conincStart={85}
+				>
+					<TypeFiller type={type} per={per}/>
+				</Meter>
 				<button type="button" className="flex items-center">
 					<EllipsisVertical color="#BCBCBC" size={"30"} className="w-fit" />
 				</button>
