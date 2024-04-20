@@ -1,11 +1,7 @@
 import React from "react";
 
 function TypeFiller({ type, per, varient="" }) {
-	const type_map = {
-		strength: "strength",
-		money: "money",
-		brain: "brain",
-	};
+	
 	const per_colors = {
 		bad: "#FF9A9A",
 		good: "#FFBF1B",
@@ -14,7 +10,7 @@ function TypeFiller({ type, per, varient="" }) {
 	return (
 		<>
 			<img
-				src={`icons/${type_map[type]}${varient?`-${varient}`:varient}.png`}
+				src={`icons/${type}${varient?`-${varient}`:varient}.png`}
 				alt="muscle"
 				className="w-full h-full group-hover:hidden"
 			/>
