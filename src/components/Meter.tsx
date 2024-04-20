@@ -3,7 +3,7 @@ import React from "react";
 function Meter({
 	percentage,
 	size,
-	importance,
+	importance = "4",
 	conincStart = 80,
 	conicDiff = 5,
 	gap = 5,
@@ -13,6 +13,7 @@ function Meter({
 		1: "#F6E5D9",
 		2: "#FAF4BE",
 		3: "#D4EDFB",
+        4: "white"
 	};
 
 	const per_colors = {
