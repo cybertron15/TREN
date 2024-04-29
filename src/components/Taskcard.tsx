@@ -50,7 +50,10 @@ export default function Taskcard({
 	return (
 		<div
 			className="flex border-2 w-full rounded-lg p-2 pe-0"
-			style={{ backgroundColor: importance_map[importance as keyof typeof importance_map] }}
+			style={{
+				backgroundColor:
+					importance_map[importance as keyof typeof importance_map],
+			}}
 		>
 			<div className="flex justify-between w-full">
 				<div className="flex gap-4">
@@ -67,12 +70,10 @@ export default function Taskcard({
 								<TooltipProvider>
 									<Tooltip>
 										<TooltipTrigger className="text-base font-Inter truncate ... max-w-32">
-										
-												{task}
-										
+											{task}
 										</TooltipTrigger>
 										<TooltipContent className="bg-slate-600">
-										{task}
+											{task}
 										</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
@@ -115,17 +116,18 @@ export default function Taskcard({
 						gap={3}
 						conincStart={70}
 					>
-						<button type="button" onClick={() => setStart(!start)}>
+						{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+						<div onClick={() => setStart(!start)}>
 							<img
 								src={`icons/${start ? "play-red" : "pause-yellow"}.png`}
 								alt=""
 								className="aspect-square rounded-full"
 							/>
-						</button>
+						</div>
 					</Meter>
-					<button type="button" className="flex items-center">
+					<div className="flex items-center hover:cursor-pointer">
 						<EllipsisVertical color="#BCBCBC" size={"25"} className="w-fit" />
-					</button>
+					</div>
 				</div>
 			</div>
 		</div>
