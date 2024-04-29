@@ -38,37 +38,43 @@ export default function Timer({ taskName, timer }: props) {
 	}, [start]);
 
 	return (
-		<div className="relative border-4 rounded-2xl w-72 h-72 p-4">
+		<div className="relative rounded-2xl w-full h-full flex justify-center items-center p-4">
 			<button type="button" className="absolute top-2 right-2">
-				<CircleHelp className=" border-red-500" size={30} color="#8C8C8C" opacity={"50%"}/>
+				<CircleHelp
+					className=" border-red-500"
+					size={30}
+					color="#8C8C8C"
+					opacity={"50%"}
+				/>
 			</button>
-
-			<div
-				style={{
-					background: `radial-gradient(closest-side, ${bgColor} 88%, transparent 90% 100%), 
+			<div className="relative rounded-2xl w-64 h-64 p-4">
+				<div
+					style={{
+						background: `radial-gradient(closest-side, ${bgColor} 88%, transparent 90% 100%), 
                     conic-gradient(${counterColor} ${per}%, ${counterBgColor} 0)`,
-				}}
-				className="w-full h-full rounded-full flex flex-col justify-center items-center gap-2 pt-6"
-			>
-				<div className="border border-[#FB7474] py-1 px-4 rounded-3xl">
-					{taskName}
-				</div>
-				<div className="text-4xl font-PlexMono">{`${moment
-					.utc(spentTime.current.asMilliseconds())
-					.format("HH:mm:ss")}`}</div>
-				<button
-					className="rounded-full flex justify-center items-center"
-					type="button"
-					onClick={() => {
-						setStart(!start);
 					}}
+					className="w-full h-full rounded-full flex flex-col justify-center items-center gap-2 pt-6"
 				>
-					<img
-						src={`icons/${start ? "pause-red" : "play-red"}.png`}
-						alt=""
-						className="w-14 h-14 m-auto shadow-xl rounded-full"
-					/>
-				</button>
+					<div className="border border-[#FB7474] py-1 px-4 rounded-3xl">
+						{taskName}
+					</div>
+					<div className="text-4xl font-PlexMono">{`${moment
+						.utc(spentTime.current.asMilliseconds())
+						.format("HH:mm:ss")}`}</div>
+					<button
+						className="rounded-full flex justify-center items-center"
+						type="button"
+						onClick={() => {
+							setStart(!start);
+						}}
+					>
+						<img
+							src={`icons/${start ? "pause-red" : "play-red"}.png`}
+							alt=""
+							className="w-14 h-14 m-auto shadow-xl rounded-full"
+						/>
+					</button>
+				</div>
 			</div>
 		</div>
 	);
