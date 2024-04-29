@@ -17,6 +17,12 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        Inter: 'Inter', // Adds a new `font-roboto` class
+        PlexMono: 'IBM Plex Mono', // Adds a new `font-pacifico` class
+        caveat: 'Caveat', // Adds a new `font-caveat` class
+        JetBrainsMono: "JetBrains Mono" // Adds a new `font-caveat` class
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
