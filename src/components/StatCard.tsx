@@ -35,16 +35,16 @@ function StatCard({ strength, money, brain, duration }: props) {
 	};
 	Object.keys(types).map(() => {});
 	return (
-		<div className="">
+		<div className="w-full flex flex-col gap-2">
 			<div className="text-center">{duration}</div>
-			<div className="flex justify-between mt-2">
+			<div className="flex justify-between">
 				{Object.keys(types).map((item, index) => {
 
 					return (
 							<Meter
 								percentage={types[item]}
 								importance={"4"}
-								size={40}
+								size={46}
 								gap={8}
 								conincStart={85}
                                 key={item}
