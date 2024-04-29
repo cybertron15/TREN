@@ -1,7 +1,8 @@
 import React from "react";
 import Taskcard from "./Taskcard";
-import { ChevronDown, CircleHelp } from "lucide-react";
-import { Button } from "./ui/button";
+import { CircleHelp } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import {
 	Select,
 	SelectContent,
@@ -83,52 +84,52 @@ function Tasks() {
 			percentage: 50,
 			subtasks: [],
 		},
-		{
-			task: "Gym Session",
-			type: "strength",
-			duration: "1.5 hrs",
-			time: "06:00 PM",
-			importance: 1,
-			percentage: 25,
-			subtasks: [
-				{
-					task: "Strength Training",
-					type: "strength",
-					duration: "45 mins",
-					time: "06:30 PM",
-					importance: 2,
-					percentage: 30,
-					subtasks: [],
-				},
-			],
-		},
-		{
-			task: "Dinner Preparation",
-			type: "brain",
-			duration: "1 hr",
-			time: "07:00 PM",
-			importance: 3,
-			percentage: 40,
-			subtasks: [],
-		},
-		{
-			task: "Dinner with Family",
-			type: "brain",
-			duration: "1 hr",
-			time: "08:00 PM",
-			importance: 3,
-			percentage: 100,
-			subtasks: [],
-		},
-		{
-			task: "Reading Book",
-			type: "brain",
-			duration: "1 hr",
-			time: "09:00 PM",
-			importance: 2,
-			percentage: 70,
-			subtasks: [],
-		},
+		// {
+		// 	task: "Gym Session",
+		// 	type: "strength",
+		// 	duration: "1.5 hrs",
+		// 	time: "06:00 PM",
+		// 	importance: 1,
+		// 	percentage: 25,
+		// 	subtasks: [
+		// 		{
+		// 			task: "Strength Training",
+		// 			type: "strength",
+		// 			duration: "45 mins",
+		// 			time: "06:30 PM",
+		// 			importance: 2,
+		// 			percentage: 30,
+		// 			subtasks: [],
+		// 		},
+		// 	],
+		// },
+		// {
+		// 	task: "Dinner Preparation",
+		// 	type: "brain",
+		// 	duration: "1 hr",
+		// 	time: "07:00 PM",
+		// 	importance: 3,
+		// 	percentage: 40,
+		// 	subtasks: [],
+		// },
+		// {
+		// 	task: "Dinner with Family",
+		// 	type: "brain",
+		// 	duration: "1 hr",
+		// 	time: "08:00 PM",
+		// 	importance: 3,
+		// 	percentage: 100,
+		// 	subtasks: [],
+		// },
+		// {
+		// 	task: "Reading Book",
+		// 	type: "brain",
+		// 	duration: "1 hr",
+		// 	time: "09:00 PM",
+		// 	importance: 2,
+		// 	percentage: 70,
+		// 	subtasks: [],
+		// },
 		{
 			task: "Meditation",
 			type: "brain",
@@ -233,23 +234,24 @@ function Tasks() {
 			task: "Personal Finance Management",
 			type: "money",
 			duration: "1 hr",
-			time: "08:00 PM",
+			time: "08:00 PM",  
 			importance: 3,
 			percentage: 40,
 			subtasks: [],
 		},
 	];
 	return (
-		<div className="rounded-2xl bg-white w-[22%] p-3 h-svh">
+		<>
+		
 			<div className="flex mb-4 justify-between">
 				<div className="flex items-center gap-1">
-					<div className="font-PlexMono text-4xl">Tasks</div>
-					<div className="border bg-red-500 w-6 h-6 rounded-full justify-center text-white font-PlexMono mt-1.5 flex items-center">
-						5
+					<div className="font-Inter text-4xl">Tasks</div>
+					<div className="bg-red-500 w-7 h-7 rounded-full justify-center text-white font-PlexMono mt-1 flex items-center text-sm">
+						{taskList.length}
 					</div>
 					<CircleHelp
-						className="border mt-1.5 "
-						size={26}
+						className="mt-1 "
+						size={33}
 						color="#8C8C8C"
 						opacity={"50%"}
 					/>
@@ -266,11 +268,44 @@ function Tasks() {
 					</Select>
 				</div>
 			</div>
-			{taskList.map((task) => {
-				return task.subtasks.length !== 0 ? (
-					<Accordion type="single" collapsible>
-						<AccordionItem value={task.task}>
-							<AccordionTrigger>
+			
+			<ScrollArea className="h-full p-2">
+				{taskList.map((task) => {
+					return task.subtasks.length !== 0 ? (
+						<Accordion type="single" key={task.task} collapsible>
+							<AccordionItem value={task.task}>
+								<AccordionTrigger>
+									<Taskcard
+										task={task.task}
+										type={task.type}
+										duration={task.duration}
+										time={task.time}
+										importance={task.importance}
+										percentage={task.percentage}
+										subtasks={true}
+									/>
+								</AccordionTrigger>
+								<AccordionContent>
+									{task.subtasks.map((subtask) => {
+										return (
+											<Taskcard
+												task={subtask.task}
+												type={subtask.type}
+												duration={subtask.duration}
+												time={subtask.time}
+												importance={subtask.importance}
+												percentage={subtask.percentage}
+												subtasks={false}
+												key={`${subtask.task}`}
+											/>
+										);
+									})}
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
+					) : (
+						<div className="pb-2" key={task.task}>
+							<div>
 								<Taskcard
 									task={task.task}
 									type={task.type}
@@ -278,45 +313,17 @@ function Tasks() {
 									time={task.time}
 									importance={task.importance}
 									percentage={task.percentage}
-									subtasks={true}
+									subtasks={false}
 								/>
-							</AccordionTrigger>
-							<AccordionContent>
-								{task.subtasks.map((subtask) => {
-									return (
-										<Taskcard
-											task={subtask.task}
-											type={subtask.type}
-											duration={subtask.duration}
-											time={subtask.time}
-											importance={subtask.importance}
-											percentage={subtask.percentage}
-											subtasks={false}
-										/>
-									);
-								})}
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
-				) : (
-					<div className="pb-2">
-						<div>
-
-						<Taskcard
-							task={task.task}
-							type={task.type}
-							duration={task.duration}
-							time={task.time}
-							importance={task.importance}
-							percentage={task.percentage}
-							subtasks={false}
-							/>
 							</div>
-							<hr className="w-full mt-2"/>
-					</div>
-				);
-			})}
-		</div>
+							<hr className="w-full mt-2" />
+						</div>
+					);
+				})}
+			</ScrollArea>
+			
+	
+		</>
 	);
 }
 
