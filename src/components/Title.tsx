@@ -8,7 +8,7 @@ function Title() {
 				<span className="first-letter:text-black text-red-500">TREN</span> 
 			</div>
 			<div className="flex items-center">
-				<Avatar className="w-16 h-16 ring-2 ring-red-500">
+				<Avatar className="w-20 h-20 ring-4 ring-red-500">
 					<AvatarImage src="https://github.com/shadcn.png" />
 					<AvatarFallback>CN</AvatarFallback>
 				</Avatar>
