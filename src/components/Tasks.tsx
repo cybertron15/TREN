@@ -234,31 +234,30 @@ function Tasks() {
 			task: "Personal Finance Management",
 			type: "money",
 			duration: "1 hr",
-			time: "08:00 PM",  
+			time: "08:00 PM",
 			importance: 3,
 			percentage: 40,
 			subtasks: [],
 		},
 	];
 	return (
-		<>
-		
-			<div className="flex mb-4 justify-between">
+		<div className="rounded-2xl bg-white h-full flex flex-col">
+			<div className="relative flex mb-1 p-3">
+				<CircleHelp
+					className="absolute top-1.5 right-1.5 hidden"
+					size={25}
+					color="#8C8C8C"
+					opacity={"50%"}
+				/>
 				<div className="flex items-center gap-1">
 					<div className="font-Inter text-4xl">Tasks</div>
 					<div className="bg-red-500 w-7 h-7 rounded-full justify-center text-white font-PlexMono mt-1 flex items-center text-sm">
 						{taskList.length}
 					</div>
-					<CircleHelp
-						className="mt-1 "
-						size={33}
-						color="#8C8C8C"
-						opacity={"50%"}
-					/>
 				</div>
-				<div className="mt-auto">
+				<div className="h-full flex items-end mt-1">
 					<Select>
-						<SelectTrigger className="text-lg text-[#8C8C8C]">
+						<SelectTrigger className="text-2xl text-[#8C8C8C]">
 							<SelectValue placeholder="Today" />
 						</SelectTrigger>
 						<SelectContent>
@@ -268,8 +267,8 @@ function Tasks() {
 					</Select>
 				</div>
 			</div>
-			
-			<ScrollArea className="h-full p-2">
+
+			<ScrollArea className="h-full px-2">
 				{taskList.map((task) => {
 					return task.subtasks.length !== 0 ? (
 						<Accordion type="single" key={task.task} collapsible>
@@ -321,9 +320,7 @@ function Tasks() {
 					);
 				})}
 			</ScrollArea>
-			
-	
-		</>
+		</div>
 	);
 }
 
