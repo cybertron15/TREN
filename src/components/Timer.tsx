@@ -42,7 +42,7 @@ export default function Timer({ taskName, timer }: props) {
 			<button type="button" className="absolute top-2 right-2">
 				<CircleHelp
 					className=" border-red-500"
-					size={30}
+					size={25}
 					color="#8C8C8C"
 					opacity={"50%"}
 				/>
