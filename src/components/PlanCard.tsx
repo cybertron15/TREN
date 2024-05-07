@@ -2,6 +2,12 @@ import { Pen, Trash } from "lucide-react";
 import React, { useState } from "react";
 import Meter from "./Meter";
 import TypeFiller from "./TypeFiller";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "./ui/tooltip";
 
 type Props = {
 	task: string;
@@ -33,21 +39,21 @@ function PlanCard({
 			style={{ backgroundColor: importance_map[importance] }}
 		>
 			<div className="group flex gap-2 items-center">
-				<Meter
-					percentage={per}
-					importance={importance}
-					size={50}
-					gap={8}
-				>
-					<TypeFiller type={type} varient={"solid"} per={per}/>
+				<Meter percentage={per} importance={importance} size={30} gap={4}>
+					<TypeFiller type={type} varient={"solid"} per={per} />
 				</Meter>
 
-				<div className="flex flex-col">
-					<span className="text-lg"> {task} </span>
-					<span className="text-xs">
-						{time} | {duration}
-					</span>
-				</div>
+				<TooltipProvider>
+					<Tooltip>
+						<TooltipTrigger className="text-start text-sm font-Inter truncate ... w-32">
+							{task}
+						</TooltipTrigger>
+						<TooltipContent className="bg-slate-600">{task}</TooltipContent>
+					</Tooltip>
+				</TooltipProvider>
+				<span className="text-xs text-slate-500">
+					{time} | {duration}
+				</span>
 			</div>
 			<div className="flex items-center gap-2 p-2">
 				<button type="button" className="hover:text-red-600">
