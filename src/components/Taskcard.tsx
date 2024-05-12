@@ -29,27 +29,36 @@ export default function Taskcard({
 }: Props) {
 	const [per, setpercentage] = useState(percentage);
 	const [start, setStart] = useState(false);
-	const importance_map = {
-		1: "#F6E5D9",
-		2: "#FAF4BE",
-		3: "#D4EDFB",
-	};
+	// const importance_map = {
+	// 	1: "#F6E5D9",
+	// 	2: "#FAF4BE",
+	// 	3: "#D4EDFB",
+	// };
 
+	
+//TODO change the hardcoded color values
+
+const per_colors = {
+	bad: "black",
+	good: "black",
+	excelent: "black",
+};
+
+const importance_map = {
+	1: "white",
+	2: "white",
+	3: "white",
+};
 	const type_map = {
 		strength: "strength-outline.png",
 		money: "money-outline.png",
 		brain: "brain-outline.png",
 	};
 
-	const per_colors = {
-		bad: "#FF9A9A",
-		good: "#FFBF1B",
-		excelent: "#A4CA92",
-	};
 
 	return (
 		<div
-			className="flex border-2 w-full rounded-lg p-2 pe-0"
+			className="flex w-full rounded-lg p-2 pe-0"
 			style={{
 				backgroundColor:
 					importance_map[importance as keyof typeof importance_map],
@@ -119,7 +128,7 @@ export default function Taskcard({
 						{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 						<div onClick={() => setStart(!start)}>
 							<img
-								src={`icons/${start ? "play-red" : "pause-yellow"}.png`}
+								src={`icons/${start ? "play-red" : "pause-red"}.png`}
 								alt=""
 								className="aspect-square rounded-full"
 							/>
