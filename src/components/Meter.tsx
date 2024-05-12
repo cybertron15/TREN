@@ -19,18 +19,30 @@ function Meter({
 	gap = 5,
 	children,
 }: Props) {
+	// const importance_map = {
+	// 	1: "#F6E5D9",
+	// 	2: "#FAF4BE",
+	// 	3: "#D4EDFB",
+    //     4: "white"
+	// };
 	const importance_map = {
-		1: "#F6E5D9",
-		2: "#FAF4BE",
-		3: "#D4EDFB",
+		1: "white",
+		2: "white",
+		3: "white",
         4: "white"
 	};
-
+//TODO change the hardcoded color values
+	// const per_colors = {
+	// 	bad: "#FF9A9A",
+	// 	good: "#FFBF1B",
+	// 	excelent: "#A4CA92",
+	// };
 	const per_colors = {
-		bad: "#FF9A9A",
-		good: "#FFBF1B",
-		excelent: "#A4CA92",
+		bad: "#FB7474",
+		good: "#FB7474",
+		excelent: "#FB7474",
 	};
+
 	return (
 		<div
 			className="group rounded-full flex justify-center items-center"

@@ -2,11 +2,17 @@ import React from "react";
 
 function TypeFiller({ type, per, varient="" }) {
 	
+	// const per_colors = {
+	// 	bad: "#FF9A9A",
+	// 	good: "#FFBF1B",
+	// 	excelent: "#A4CA92",
+	// };
 	const per_colors = {
-		bad: "#FF9A9A",
-		good: "#FFBF1B",
-		excelent: "#A4CA92",
+		bad: "black",
+		good: "black",
+		excelent: "black",
 	};
+	//TODO change the hardcoded color values
 	return (
 		<>
 			<img

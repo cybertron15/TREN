@@ -26,19 +26,25 @@ function PlanCard({
 	importance,
 	percentage,
 }: Props) {
-	const [per, setpercentage] = useState("90");
+	const [per, setpercentage] = useState(percentage);
+	// const importance_map = {
+	// 	1: "#F6E5D9",
+	// 	2: "#FAF4BE",
+	// 	3: "#D4EDFB",
+	// };
+//TODO change the hardcoded color values
 	const importance_map = {
-		1: "#F6E5D9",
-		2: "#FAF4BE",
-		3: "#D4EDFB",
+		1: "white",
+		2: "white",
+		3: "white",
 	};
 
 	return (
 		<div
-			className="flex border-2 justify-between rounded-lg p-1"
+			className="flex justify-between rounded-lg p-1"
 			style={{ backgroundColor: importance_map[importance] }}
 		>
-			<div className="group flex gap-2 items-center">
+			<div className="group flex gap-2 items-center text-[0.7rem]">
 				<Meter percentage={per} importance={importance} size={30} gap={4}>
 					<TypeFiller type={type} varient={"solid"} per={per} />
 				</Meter>
