@@ -57,6 +57,7 @@ function Goals() {
 			</div>
 			<ScrollArea className=" h-full">
 				{goalList.map((goal, index) => (
+					<>
 					<GoalCard
 						key={`${index}${goal}`}
 						deadline={goal.deadline} // insert UTC date with time
@@ -65,7 +66,9 @@ function Goals() {
 						type={goal.type}
 						importance={goal.importance}
 						timeSpent={goal.timeSpent}
-					/>
+						/>
+					<hr className="w-full" />
+						</>
 				))}
 			</ScrollArea>
 		</div>

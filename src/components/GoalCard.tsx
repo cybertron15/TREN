@@ -35,11 +35,18 @@ export default function GoalCard({
 		minutes: 0,
 		seconds: 0,
 	});
+	// const importance_map = {
+	// 	1: "#F6E5D9",
+	// 	2: "#FAF4BE",
+	// 	3: "#D4EDFB",
+	// };
 	const importance_map = {
-		1: "#F6E5D9",
-		2: "#FAF4BE",
-		3: "#D4EDFB",
+		1: "white",
+		2: "white",
+		3: "white",
 	};
+
+	// TODO  change the hardcoded color values
 
 	const type_map = {
 		strength: "strength.png",
@@ -47,11 +54,6 @@ export default function GoalCard({
 		brain: "brain.png",
 	};
 
-	const per_colors = {
-		bad: "#FF9A9A",
-		good: "#FFBF1B",
-		excelent: "#A4CA92",
-	};
 
 	// const targetDate = moment(deadline);
 	const targetDate = moment(deadline);
@@ -81,7 +83,7 @@ export default function GoalCard({
 
 	return (
 		<div
-			className="group flex border-2 rounded-lg p-2 pe-0 m-4"
+			className="group flex rounded-lg p-2 pe-0 m-4"
 			style={{ backgroundColor: importance_map[importance] }}
 		>
 			<div className="flex gap-1 w-full justify-between">
@@ -113,7 +115,7 @@ export default function GoalCard({
 						gap={12}
 						conincStart={85}
 					>
-						<TypeFiller type={type} per={per} />
+						<TypeFiller type={type} per={per} varient="outline" />
 					</Meter>
 					<button type="button" className="flex items-center">
 						<EllipsisVertical color="#BCBCBC" size={"30"} className="w-fit" />
