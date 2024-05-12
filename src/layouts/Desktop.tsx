@@ -4,6 +4,7 @@ import StatCard from "@/components/StatCard";
 import Tasks from "@/components/Tasks";
 import Timer from "@/components/Timer";
 import Title from "@/components/Title";
+import { CircleHelp } from "lucide-react";
 import React from "react";
 
 function Desktop() {
@@ -16,7 +17,13 @@ function Desktop() {
 					</div>
 				</div>
 				<div className="p-1 pt-2 pe-2 w-[75%]">
-					<div className="bg-white flex justify-around rounded-2xl h-full p-1">
+					<div className="relative bg-white flex justify-around rounded-2xl h-full p-1">
+						<CircleHelp
+							className="absolute top-2 right-2"
+							size={25}
+							color="#8C8C8C"
+							opacity={"50%"}
+						/>
 						<div className="w-[20%] text-xl">
 							<StatCard
 								duration={"Yesterday"}
@@ -72,6 +79,9 @@ function Desktop() {
 				</div>
 				<div className="h-full w-[30%] p-1 pb-2">
 					<Plan />
+				</div>
+				<div className="w-[20%] h-[40%] p-1">
+					<div className="bg-white rounded-xl w-full h-full">ads</div>
 				</div>
 			</div>
 		</div>
