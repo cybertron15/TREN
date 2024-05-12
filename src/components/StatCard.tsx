@@ -26,12 +26,12 @@ function StatCard({ strength, money, brain, duration }: props) {
 		excelent: "#A4CA92",
 	};
 	const power = Math.round((strength + money + brain) / 3);
-    
+
 	const types = {
 		strength,
 		money,
 		brain,
-        power
+		power,
 	};
 	Object.keys(types).map(() => {});
 	return (
@@ -39,18 +39,19 @@ function StatCard({ strength, money, brain, duration }: props) {
 			<div className="text-center">{duration}</div>
 			<div className="flex justify-between">
 				{Object.keys(types).map((item, index) => {
-
 					return (
-							<Meter
-								percentage={types[item]}
-								importance={"4"}
-								size={46}
-								gap={8}
-								conincStart={85}
-                                key={item}
-							>
+						<Meter
+							percentage={types[item]}
+							importance={"4"}
+							size={46}
+							gap={8}
+							conincStart={85}
+							key={item}
+						>
+							<div className="text-sm">
 								<TypeFiller type={item} varient={"solid"} per={types[item]} />
-							</Meter>
+							</div>
+						</Meter>
 					);
 				})}
 			</div>
