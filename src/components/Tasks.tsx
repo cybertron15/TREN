@@ -268,7 +268,7 @@ function Tasks() {
 				</div>
 			</div>
 
-			<ScrollArea className="h-full px-2">
+			<ScrollArea className="h-full px-2 m-2">
 				{taskList.map((task) => {
 					return task.subtasks.length !== 0 ? (
 						<Accordion type="single" key={task.task} collapsible>
