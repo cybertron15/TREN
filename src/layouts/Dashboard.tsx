@@ -7,7 +7,7 @@ import Title from "@/components/Title";
 import { CircleHelp } from "lucide-react";
 import React from "react";
 
-function Desktop() {
+function Dashbaord() {
 	return (
 		<div className="flex flex-col h-[100vh]">
 			<div className="flex h-[15%]">
@@ -80,12 +80,16 @@ function Desktop() {
 				<div className="h-full w-[30%] p-1 pb-2">
 					<Plan />
 				</div>
-				<div className="w-[20%] h-[40%] p-1">
-					<div className="bg-white rounded-xl w-full h-full">ads</div>
+				<div className="w-[20%] h-[100%] p-1 pb-2 flex flex-col gap-2">
+					<div className="bg-white rounded-xl w-full h-[40%] flex justify-center items-center">Analytics</div>
+					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">GYM</div>
+					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">Nutrition</div>
+					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">Journal</div>
 				</div>
+				
 			</div>
 		</div>
 	);
 }
 
-export default Desktop;
+export default Dashbaord;
