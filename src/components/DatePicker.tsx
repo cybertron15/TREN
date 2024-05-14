@@ -7,7 +7,7 @@ function DatePicker() {
     const [month, setmonth] = useState(moment.monthsShort()[moment().month()])
     const [week, setweek] = useState("Week 1")    
 	return (
-		<div className="flex flex-col h-svh ms-2 font-Inter">
+		<div className="flex flex-col h-full font-Inter bg-white p-3 rounded-xl">
 			<div className="flex gap-2 items-center my-2">
 				<div className="text-6xl first-letter:text-black text-[#F44949]">
 					{year}
