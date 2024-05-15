@@ -6,6 +6,7 @@ import Timer from "@/components/Timer";
 import Title from "@/components/Title";
 import { CircleHelp } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Dashbaord() {
 	return (
@@ -81,12 +82,21 @@ function Dashbaord() {
 					<Plan />
 				</div>
 				<div className="w-[20%] h-[100%] p-1 pb-2 flex flex-col gap-2">
-					<div className="bg-white rounded-xl w-full h-[40%] flex justify-center items-center">Analytics</div>
-					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">GYM</div>
-					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">Nutrition</div>
-					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">Journal</div>
+					<div className="bg-white rounded-xl w-full h-[40%] flex justify-center items-center">
+						Analytics
+					</div>
+					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
+						GYM
+					</div>
+					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
+						Nutrition
+					</div>
+					<Link to="/journal" className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
+						<div className="">
+							Journal
+						</div>
+					</Link>
 				</div>
-				
 			</div>
 		</div>
 	);
