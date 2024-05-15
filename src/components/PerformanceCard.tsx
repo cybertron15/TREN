@@ -5,17 +5,19 @@ import { Rating } from "react-simple-star-rating";
 import { Pen, Info } from "lucide-react";
 
 type Props = {
+	task: string;
 	work: string;
 	plan: string;
+	reasons: string;
 	type: string;
 	duration: string;
 	complition: string;
 };
 
-function PerformanceCard({ work, plan, type, duration, complition}: Props) {
+function PerformanceCard({task, work, plan, reasons, type, duration, complition}: Props) {
 	const [ratingValue, setRatingValue] = useState(0);
 	const [toggleEditMode, settoggleEditMode] = useState(false);
-	const [info, setinfo] = useState({ work, plan });
+	const [info, setinfo] = useState({ work, plan, reasons});
 	const handleRating = (rate: number) => {
 		setRatingValue(rate);
 		console.log(rate);
@@ -26,10 +28,10 @@ function PerformanceCard({ work, plan, type, duration, complition}: Props) {
 				<div className="flex gap-2">
 					<img
 						src={`icons/${type}-solid.png`}
-						alt="muscle"
-						className="w-full h-full group-hover:hidden"
+						alt={type}
+						className="w-8 h-8 group-hover:hidden"
 					/>
-					<div className="text-2xl">GYM</div>
+					<div className="text-2xl">{task}</div>
 					<button
 						type="button"
 						className="hover:text-red-600"
@@ -58,7 +60,7 @@ function PerformanceCard({ work, plan, type, duration, complition}: Props) {
 				/>
 			</div>
 			<div className="text-slate-500 mt-1 text-sm">
-				Worked for {duration} | {complition}% completed
+				Worked for {duration?duration:"0 hours 0 mins"} | {complition?complition:"0"}% completed
 			</div>
 			<hr className="w-full border-t-2 mt-2" />
 
@@ -73,7 +75,16 @@ function PerformanceCard({ work, plan, type, duration, complition}: Props) {
 							setinfo({ ...info, work: e.target.value });
 						}}
 					/>
-					<div className="text-lg mt-2">What's your plan for tomorrow?</div>
+                    <div className="text-lg mt-2">Reasons for not doing?</div>
+                    <Textarea
+						className="mt-2 h-20 text-slate-500"
+						placeholder="if you are not satified with the task completion write the reason."
+						value={info.reasons}
+						onChange={(e) => {
+							setinfo({ ...info, reasons: e.target.value });
+						}}
+					/>
+					<div className="text-lg mt-2">What are your plans for tomorrow?</div>
 					<Textarea
 						className="mt-2 h-20 text-slate-500"
 						placeholder="Write what you need to get done tomorrow"
@@ -107,6 +118,10 @@ function PerformanceCard({ work, plan, type, duration, complition}: Props) {
 					<div className="text-sm mt-2">{"What I did"}</div>
 					<div className="text-sm text-slate-500">
 						{info.work?.length >= 5 ? info.work : "-"}
+					</div>
+                    <div className="text-sm mt-2">{"Reason for not doing"}</div>
+					<div className="text-sm text-slate-500">
+						{info.reasons?.length >= 5 ? info.reasons : "-"}
 					</div>
 					<div className="text-sm mt-2">{"Plan for tomorrow"}</div>
 					<div className="text-sm text-slate-500">
