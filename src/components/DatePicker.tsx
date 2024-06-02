@@ -54,7 +54,7 @@ function DatePicker() {
 
                 <div className="w-1 h-full bg-[#BCBCBC] opacity-40 rounded-lg"/>
                 <div className="flex flex-col justify-between h-full py-1 ms-4">
-                    {["Week 1","Week 2","Week 3", "Week 4"].map((item) => {
+                    {["TREN 1","TREN 2","TREN 3"].map((item) => {
 						return (
 							<button onClick={()=>{setweek(item)}} type="button" key={item} className={`text-2xl me-3 ${week===item?"text-red-600":"text-[#9A9A9A]"} hover:text-red-600`}>
 								{item}
