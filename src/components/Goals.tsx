@@ -39,7 +39,7 @@ function Goals() {
 		},
 	];
 	return (
-		<div className="relative flex flex-col h-full border p-3">
+		<div className="relative flex flex-col h-full p-3">
 			<CircleHelp
 					className="absolute top-1.5 right-1.5"
 					size={25}
@@ -55,7 +55,7 @@ function Goals() {
 				</button>
 				
 			</div>
-			<ScrollArea className=" h-full">
+			<ScrollArea className="h-full">
 				{goalList.map((goal, index) => (
 					<>
 					<GoalCard

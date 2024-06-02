@@ -3,7 +3,6 @@ import { EllipsisVertical } from "lucide-react";
 import Meter from "./Meter";
 import TypeFiller from "./TypeFiller";
 import moment, { duration } from "moment";
-import { log } from "console";
 import {
 	Tooltip,
 	TooltipContent,
@@ -83,7 +82,7 @@ export default function GoalCard({
 
 	return (
 		<div
-			className="group flex rounded-lg p-2 pe-0 m-4"
+			className="group flex rounded-lg p-2 pe-0 my-2"
 			style={{ backgroundColor: importance_map[importance] }}
 		>
 			<div className="flex gap-1 w-full justify-between">
