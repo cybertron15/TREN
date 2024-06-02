@@ -4,7 +4,19 @@ import StatCard from "@/components/StatCard";
 import Tasks from "@/components/Tasks";
 import Timer from "@/components/Timer";
 import Title from "@/components/Title";
-import { CircleHelp } from "lucide-react";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+	Apple,
+	CircleHelp,
+	Dumbbell,
+	LineChart,
+	NotebookPen,
+} from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -59,8 +71,8 @@ function Dashbaord() {
 				<div className="w-[25%] p-1 ps-2 pb-2 h-full">
 					<Tasks />
 				</div>
-				<div className="w-[25%] flex flex-col">
-					<div className="h-[40%] p-1">
+				<div className="w-[20%] h-[100%] p-1 pb-2 flex flex-col gap-2">
+					<div className="h-[40%]">
 						<div className="h-full bg-white rounded-2xl">
 							<Timer
 								taskName={"DSA"}
@@ -72,30 +84,45 @@ function Dashbaord() {
 							/>
 						</div>
 					</div>
-					<div className="flex-grow p-1 pb-2 h-[60%]">
+					<div className="h-[30%] flex gap-2">
+						<div className="bg-white rounded-xl w-full flex justify-center items-center">
+							<LineChart size={70} strokeWidth={1} />
+						</div>
+						<div className="bg-white rounded-xl w-full flex flex-col gap-2 justify-center items-center p-2">
+							<Dumbbell size={70} strokeWidth={1} />
+						</div>
+					</div>
+
+					<div className="flex h-[30%] gap-2">
+						<div className="bg-white rounded-xl w-full flex justify-center items-center">
+							<Apple size={70} strokeWidth={1} />
+						</div>
+						<Link
+							to="/journal"
+							className="bg-white rounded-xl w-full flex justify-center items-center"
+						>
+							<TooltipProvider>
+								<Tooltip>
+									<TooltipTrigger className="text-base font-Inter truncate ... max-w-48 mb-1">
+										{<NotebookPen size={70} strokeWidth={1} />}
+									</TooltipTrigger>
+									<TooltipContent className="bg-slate-600">
+										Journal
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+						</Link>
+					</div>
+				</div>
+				<div className="w-[25%] flex flex-col">
+					<div className="flex-grow p-1 pb-2 h-[100%]">
 						<div className="h-full bg-white rounded-2xl">
 							<Goals />
 						</div>
 					</div>
 				</div>
-				<div className="h-full w-[30%] p-1 pb-2">
+				<div className="h-full w-[30%] p-1 pb-2 pe-2">
 					<Plan />
-				</div>
-				<div className="w-[20%] h-[100%] p-1 pb-2 flex flex-col gap-2">
-					<div className="bg-white rounded-xl w-full h-[40%] flex justify-center items-center">
-						Analytics
-					</div>
-					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
-						GYM
-					</div>
-					<div className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
-						Nutrition
-					</div>
-					<Link to="/journal" className="bg-white rounded-xl w-full h-[20%] flex justify-center items-center">
-						<div className="">
-							Journal
-						</div>
-					</Link>
 				</div>
 			</div>
 		</div>
