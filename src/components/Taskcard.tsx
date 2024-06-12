@@ -68,7 +68,7 @@ const importance_map = {
 				<div className="flex gap-4">
 					<div className="borde flex flex-col justify-center">
 						<img
-							src={`icons/${type_map[type as keyof typeof type_map]}`}
+							src={`/icons/${type_map[type as keyof typeof type_map]}`}
 							alt="muscle"
 							className="w-9 h-9"
 						/>
@@ -128,7 +128,7 @@ const importance_map = {
 						{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 						<div onClick={() => setStart(!start)}>
 							<img
-								src={`icons/${start ? "play-red" : "pause-red"}.png`}
+								src={`/icons/${start ? "play-red" : "pause-red"}.png`}
 								alt=""
 								className="aspect-square rounded-full"
 							/>

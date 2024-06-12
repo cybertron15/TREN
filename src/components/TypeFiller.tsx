@@ -16,7 +16,7 @@ function TypeFiller({ type, per, varient="" }) {
 	return (
 		<>
 			<img
-				src={`icons/${type}${varient?`-${varient}`:varient}.png`}
+				src={`/icons/${type}${varient?`-${varient}`:varient}.png`}
 				alt="muscle"
 				className="w-full h-full group-hover:hidden"
 			/>

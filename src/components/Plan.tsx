@@ -124,7 +124,7 @@ function Plan() {
 						conincStart={85}
 						gap={0}
 					>
-						<img src="icons/target.png" alt="" className="mb-2.5 ms-2.5" />
+						<img src="/icons/target.png" alt="" className="mb-2.5 ms-2.5" />
 					</Meter>
 				</div>
 				<div className="h-full pt-3">

@@ -69,8 +69,8 @@ export default function Timer({ taskName, timer }: props) {
 						}}
 					>
 						<img
-							src={`icons/${start ? "pause-red" : "play-red"}.png`}
-							alt=""
+							src={`/icons/${start ? "pause-red" : "play-red"}.png`}
+							alt="start"
 							className="w-14 h-14 m-auto shadow-xl rounded-full"
 						/>
 					</button>
