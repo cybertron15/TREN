@@ -8,26 +8,27 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { stringTo12hrFormatTimeString } from "@/utils/dateTimeUtils";
 
 type Props = {
 	task: string;
-	type: string;
+	category: string;
 	duration: string;
-	time: string;
-	importance: number;
-	percentage: number;
+	startTime: string;
+	completion: number;
 	subtasks: boolean;
+	priority: number;
 };
 export default function Taskcard({
 	task,
-	type,
+	category,
 	duration,
-	time,
-	importance,
-	percentage,
+	startTime,
+	priority,
+	completion,
 	subtasks,
 }: Props) {
-	const [per, setpercentage] = useState(percentage);
+	const [per, setpercentage] = useState(completion);
 	const [start, setStart] = useState(false);
 	// const importance_map = {
 	// 	1: "#F6E5D9",
@@ -35,41 +36,40 @@ export default function Taskcard({
 	// 	3: "#D4EDFB",
 	// };
 
-	
-//TODO change the hardcoded color values
 
-const per_colors = {
-	bad: "black",
-	good: "black",
-	excelent: "black",
-};
+	//TODO change the hardcoded color values
 
-const importance_map = {
-	1: "white",
-	2: "white",
-	3: "white",
-};
-	const type_map = {
+	const per_colors = {
+		bad: "black",
+		good: "black",
+		excelent: "black",
+	};
+
+	const priority_map = {
+		1: "urgent",
+		2: "imp",
+		3: "chill",
+	};
+	const category_map = {
 		strength: "strength-outline.png",
 		money: "money-outline.png",
 		brain: "brain-outline.png",
-	};
-
-
+	}
+	
 	return (
 		<div
 			className="flex w-full rounded-lg p-2 pe-0"
 			style={{
 				backgroundColor:
-					importance_map[importance as keyof typeof importance_map],
+					priority_map[priority as keyof typeof priority_map],
 			}}
 		>
 			<div className="flex justify-between w-full">
 				<div className="flex gap-4">
 					<div className="borde flex flex-col justify-center">
 						<img
-							src={`/icons/${type_map[type as keyof typeof type_map]}`}
-							alt="muscle"
+							src={`/icons/${category_map[category as keyof typeof category_map]}`}
+							alt="strength"
 							className="w-9 h-9"
 						/>
 					</div>
@@ -97,7 +97,7 @@ const importance_map = {
 						</div>
 						<div className="flex text-xs font-Inter text-[#8C8C8C]">
 							<span>
-								{time} | {duration}
+							{stringTo12hrFormatTimeString(startTime)} | {`${duration.slice(0,2)} hr ${duration.slice(3,5)} m`}
 							</span>
 						</div>
 					</div>
@@ -120,7 +120,7 @@ const importance_map = {
 					</div>
 					<Meter
 						percentage={per}
-						importance={importance}
+						importance={priority}
 						size={34}
 						gap={3}
 						conincStart={70}
@@ -134,9 +134,9 @@ const importance_map = {
 							/>
 						</div>
 					</Meter>
-					<div className="flex items-center hover:cursor-pointer">
+					{/* <div className="flex items-center hover:cursor-pointer">
 						<EllipsisVertical color="#BCBCBC" size={"25"} className="w-fit" />
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

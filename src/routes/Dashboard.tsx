@@ -10,6 +10,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import axiosInstance from "@/utils/axiousInstance";
+import isLoggedIn from "@/utils/loginCheck";
 import {
 	Apple,
 	CircleHelp,
@@ -18,7 +20,7 @@ import {
 	NotebookPen,
 } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect, type LoaderFunctionArgs } from "react-router-dom";
 
 function Dashbaord() {
 	return (
@@ -129,4 +131,19 @@ function Dashbaord() {
 	);
 }
 
+async function loader({ params, request }: LoaderFunctionArgs)  {
+	if (!isLoggedIn()){
+		return redirect("/login")
+	}
+	try {
+		const res = await axiosInstance.get('/tasks')
+		return {success: true,data:res.data}
+	} catch (error) {
+		console.log("failed to fetch tasks",error);
+		return {success: false, data:"failed to fetch tasks"}
+		
+	}
+
+}
+export {loader}
 export default Dashbaord;

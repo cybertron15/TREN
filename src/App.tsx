@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Dashboard from "./routes/Dashboard";
+import Dashboard, {loader as dashboardLoader} from "./routes/Dashboard";
 import Journal from "./routes/Journal";
 import {
 	createBrowserRouter,
@@ -28,6 +28,7 @@ export default function App() {
 				{
 					path: "dashboard",
 					element: <Dashboard />,
+					loader: dashboardLoader
 				},
 				{
 					path: "journal",
