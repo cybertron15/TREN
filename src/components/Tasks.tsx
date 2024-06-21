@@ -50,9 +50,15 @@ interface Tasks {
 	subtasks?: Tasks[]; // Related subtask objects (self-referencing)
 }
 
-interface LoaderData {
+interface APIres {
 	success: boolean
 	data: Tasks[]
+}
+
+interface LoaderData {
+	tasks: APIres
+	plan: APIres
+	goals: APIres
 }
 function Tasks() {
 	// const taskList = [
@@ -276,8 +282,9 @@ function Tasks() {
 	// 		subtasks: [],
 	// 	},
 	// ];
-	const { success, data } = useLoaderData() as LoaderData
-	const taskList: Tasks[] = data
+	const {tasks} = useLoaderData() as LoaderData
+	
+	const taskList: Tasks[] = tasks.data
 	const navigation = useNavigation()
 
 	return (
@@ -290,7 +297,7 @@ function Tasks() {
 					opacity={"50%"}
 				/>
 				<div className="flex items-center gap-1">
-					<div className="font-Inter text-4xl">Tasks</div>
+					<div className="font-Inter text-4xl">Activities</div>
 					<div className="bg-red-500 w-7 h-7 rounded-full justify-center text-white font-PlexMono mt-1 flex items-center text-sm">
 						{taskList.length}
 					</div>
@@ -298,11 +305,19 @@ function Tasks() {
 				<div className="h-full flex items-end mt-1">
 					<Select>
 						<SelectTrigger className="text-2xl text-[#8C8C8C]">
-							<SelectValue placeholder="Today" />
+							<SelectValue placeholder="Day 1" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="Today">Today</SelectItem>
-							<SelectItem value="Tomorrow">Tomorrow</SelectItem>
+							<SelectItem value={"Day 1"}>Day 1</SelectItem>
+							<SelectItem value={"Day 2"}>Day 2</SelectItem>
+							<SelectItem value={"Day 3"}>Day 3</SelectItem>
+							<SelectItem value={"Day 4"}>Day 4</SelectItem>
+							<SelectItem value={"Day 5"}>Day 5</SelectItem>
+							<SelectItem value={"Day 6"}>Day 6</SelectItem>
+							<SelectItem value={"Day 7"}>Day 7</SelectItem>
+							<SelectItem value={"Day 8"}>Day 8</SelectItem>
+							<SelectItem value={"Day 9"}>Day 9</SelectItem>
+							<SelectItem value={"Day 10"}>Day 10</SelectItem>
 						</SelectContent>
 					</Select>
 				</div>
@@ -311,7 +326,7 @@ function Tasks() {
 			<ScrollArea className="h-full px-2 m-2 over">
 				
 				{
-				success?
+				tasks.success?
 					navigation.state !== "idle" ?
 					<SkeletonTaskcard /> :
 					taskList.length !== 0 ?
@@ -372,7 +387,6 @@ function Tasks() {
 						<div className="mt-[20%] text-center text-slate-400">
 							Failed to fetch tasks
 						</div>
-
 				}
 			</ScrollArea>
 		</div>
