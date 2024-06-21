@@ -131,19 +131,39 @@ function Dashbaord() {
 	);
 }
 
-async function loader({ params, request }: LoaderFunctionArgs)  {
-	if (!isLoggedIn()){
+async function loader({ params, request }: LoaderFunctionArgs) {
+	if (!isLoggedIn()) {
 		return redirect("/login")
 	}
+	const result = { tasks: { success: false, data: "failed to fetch tasks" }, goals: { success: false, data: "failed to fetch goals" }, plan: { success: false, data: "failed to fetch plan" } }
 	try {
-		const res = await axiosInstance.get('/tasks')
-		return {success: true,data:res.data}
+		const response = await axiosInstance.get('/tasks')
+		result.tasks.success = true
+		result.tasks.data =  response.data
+
 	} catch (error) {
-		console.log("failed to fetch tasks",error);
-		return {success: false, data:"failed to fetch tasks"}
-		
+		console.log("failed to fetch tasks", error)
 	}
 
+	try {
+		const response = await axiosInstance.get('/goals')
+		result.goals.success = true
+		result.goals.data =  response.data
+
+	} catch (error) {
+		console.log("failed to fetch goals", error)
+	}
+
+	try {
+		const response = await axiosInstance.get('/plan')
+		result.plan.success = true
+		result.plan.data =  response.data
+
+	} catch (error) {
+		console.log("failed to fetch plans", error)
+	}
+
+	return result
 }
-export {loader}
+export { loader }
 export default Dashbaord;
