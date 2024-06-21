@@ -146,7 +146,10 @@ function Plan() {
 			<ScrollArea className="px-3 py-2 border-s-4 ms-1 h-[75%]">
 				<div>
 					{planCards.map((plan, index) => (
-						<div className="pb-2" key={`${index}${plan}`}>
+						<div className="" key={`${index}${plan}`}>
+							<div className="w-[30px] flex justify-center">
+								<div className="h-5 w-[0.15rem] rounded-full bg-gray-400" />
+							</div>
 							<PlanCard
 								task={plan.task}
 								type={plan.type}
@@ -155,10 +158,12 @@ function Plan() {
 								importance={plan.importance}
 								percentage={plan.percentage}
 							/>
-							<hr className="w-full mt-1" />
 						</div>
-						
+
 					))}
+					<div className="w-[30px] flex justify-center">
+						<div className="h-5 w-[0.15rem] rounded-full bg-gray-400" />
+					</div>
 				</div>
 			</ScrollArea>
 			<div className="text-slate-400">Day End 10:00 AM</div>

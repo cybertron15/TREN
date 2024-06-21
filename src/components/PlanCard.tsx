@@ -32,7 +32,7 @@ function PlanCard({
 	// 	2: "#FAF4BE",
 	// 	3: "#D4EDFB",
 	// };
-//TODO change the hardcoded color values
+	//TODO change the hardcoded color values
 	const importance_map = {
 		1: "white",
 		2: "white",
@@ -41,14 +41,13 @@ function PlanCard({
 
 	return (
 		<div
-			className="flex justify-between rounded-lg p-1"
+			className="flex justify-between rounded-lg py-0/5"
 			style={{ backgroundColor: importance_map[importance] }}
 		>
 			<div className="group flex gap-2 items-center text-[0.7rem]">
-				<Meter percentage={per} importance={importance} size={30} gap={4}>
-					<TypeFiller type={type} varient={"solid"} per={per} />
-				</Meter>
-
+					<Meter percentage={per} importance={importance} size={30} gap={4}>
+						<TypeFiller type={type} varient={"solid"} per={per} />
+					</Meter>
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger className="text-start text-sm font-Inter truncate ... w-32">
