@@ -1,4 +1,4 @@
-import { CircleHelp, Settings2 } from "lucide-react";
+import { CircleHelp, CirclePlus, Settings2 } from "lucide-react";
 import React from "react";
 import {
 	Select,
@@ -11,99 +11,116 @@ import Meter from "./Meter";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import PlanCard from "./PlanCard";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog"
+
+interface Plans {
+	task: string,
+	type: string,
+	duration: string,
+	time: string,
+	importance: number, // High importance
+	percentage: number,
+}
 
 function Plan() {
-	const planCards = [
-		{
-			task: "Salary Negotiation",
-			type: "money",
-			duration: "2 hrs",
-			time: "10:00 AM",
-			importance: 1, // High importance
-			percentage: 80,
-		},
-		{
-			task: "Gym Workout",
-			type: "strength",
-			duration: "1 hr",
-			time: "06:00 AM",
-			importance: 3, // Moderate to high importance
-			percentage: 60,
-		},
-		{
-			task: "Study Mathematics",
-			type: "brain",
-			duration: "1 hr",
-			time: "02:00 PM",
-			importance: 2, // Low to moderate importance
-			percentage: 50,
-		},
-		{
-			task: "Investing Strategy Meeting",
-			type: "money",
-			duration: "1 hr",
-			time: "09:00 AM",
-			importance: 1, // High importance
-			percentage: 90,
-		},
-		{
-			task: "Yoga Session",
-			type: "strength",
-			duration: "1 hr",
-			time: "11:00 AM",
-			importance: 2, // Low to moderate importance
-			percentage: 40,
-		},
-		{
-			task: "Code Review",
-			type: "brain",
-			duration: "30 mins",
-			time: "03:30 PM",
-			importance: 1, // High importance
-			percentage: 70,
-		},
-		{
-			task: "Yoga Session",
-			type: "strength",
-			duration: "1 hr",
-			time: "11:00 AM",
-			importance: 2, // Low to moderate importance
-			percentage: 40,
-		},
-		{
-			task: "Code Review",
-			type: "brain",
-			duration: "30 mins",
-			time: "03:30 PM",
-			importance: 1, // High importance
-			percentage: 70,
-		},
-		{
-			task: "Code Review",
-			type: "brain",
-			duration: "30 mins",
-			time: "03:30 PM",
-			importance: 1, // High importance
-			percentage: 70,
-		},
-		{
-			task: "Yoga Session",
-			type: "strength",
-			duration: "1 hr",
-			time: "11:00 AM",
-			importance: 2, // Low to moderate importance
-			percentage: 40,
-		},
-		{
-			task: "Code Review",
-			type: "brain",
-			duration: "30 mins",
-			time: "03:30 PM",
-			importance: 1, // High importance
-			percentage: 70,
-		},
-	];
-
+	// const planCards = [
+	// 	{
+	// 		task: "Salary Negotiation",
+	// 		type: "money",
+	// 		duration: "2 hrs",
+	// 		time: "10:00 AM",
+	// 		importance: 1, // High importance
+	// 		percentage: 80,
+	// 	},
+	// 	{
+	// 		task: "Gym Workout",
+	// 		type: "strength",
+	// 		duration: "1 hr",
+	// 		time: "06:00 AM",
+	// 		importance: 3, // Moderate to high importance
+	// 		percentage: 60,
+	// 	},
+	// 	{
+	// 		task: "Study Mathematics",
+	// 		type: "brain",
+	// 		duration: "1 hr",
+	// 		time: "02:00 PM",
+	// 		importance: 2, // Low to moderate importance
+	// 		percentage: 50,
+	// 	},
+	// 	{
+	// 		task: "Investing Strategy Meeting",
+	// 		type: "money",
+	// 		duration: "1 hr",
+	// 		time: "09:00 AM",
+	// 		importance: 1, // High importance
+	// 		percentage: 90,
+	// 	},
+	// 	{
+	// 		task: "Yoga Session",
+	// 		type: "strength",
+	// 		duration: "1 hr",
+	// 		time: "11:00 AM",
+	// 		importance: 2, // Low to moderate importance
+	// 		percentage: 40,
+	// 	},
+	// 	{
+	// 		task: "Code Review",
+	// 		type: "brain",
+	// 		duration: "30 mins",
+	// 		time: "03:30 PM",
+	// 		importance: 1, // High importance
+	// 		percentage: 70,
+	// 	},
+	// 	{
+	// 		task: "Yoga Session",
+	// 		type: "strength",
+	// 		duration: "1 hr",
+	// 		time: "11:00 AM",
+	// 		importance: 2, // Low to moderate importance
+	// 		percentage: 40,
+	// 	},
+	// 	{
+	// 		task: "Code Review",
+	// 		type: "brain",
+	// 		duration: "30 mins",
+	// 		time: "03:30 PM",
+	// 		importance: 1, // High importance
+	// 		percentage: 70,
+	// 	},
+	// 	{
+	// 		task: "Code Review",
+	// 		type: "brain",
+	// 		duration: "30 mins",
+	// 		time: "03:30 PM",
+	// 		importance: 1, // High importance
+	// 		percentage: 70,
+	// 	},
+	// 	{
+	// 		task: "Yoga Session",
+	// 		type: "strength",
+	// 		duration: "1 hr",
+	// 		time: "11:00 AM",
+	// 		importance: 2, // Low to moderate importance
+	// 		percentage: 40,
+	// 	},
+	// 	{
+	// 		task: "Code Review",
+	// 		type: "brain",
+	// 		duration: "30 mins",
+	// 		time: "03:30 PM",
+	// 		importance: 1, // High importance
+	// 		percentage: 70,
+	// 	},
+	// ];
+	const planCards: Plans[] = []
 	return (
 		<div className="relative h-full bg-white rounded-2xl p-3">
 			<CircleHelp
@@ -116,7 +133,7 @@ function Plan() {
 			<div className="flex gap-2 items-center">
 				<div className="flex gap-2">
 					<div className="font-Inter text-4xl mt-2">Plan</div>
-					<Meter
+					{/* <Meter
 						percentage={100}
 						size={52}
 						importance={4}
@@ -125,18 +142,19 @@ function Plan() {
 						gap={0}
 					>
 						<img src="/icons/target.png" alt="" className="mb-2.5 ms-2.5" />
-					</Meter>
+					</Meter> */}
 				</div>
 				<div className="h-full pt-3">
-					<Select>
+					{/* <Select>
 						<SelectTrigger className="text-2xl text-[#8C8C8C]">
 							<SelectValue placeholder="5 Apr, Mon" className="" />
 						</SelectTrigger>
 						<SelectContent>
+
 							<SelectItem value="Today">5 Apr, Mon</SelectItem>
 							<SelectItem value="Tomorrow">Tomorrow</SelectItem>
 						</SelectContent>
-					</Select>
+					</Select> */}
 				</div>
 			</div>
 			<div className="flex gap-2 items-center mt-2">
@@ -145,32 +163,61 @@ function Plan() {
 			</div>
 			<ScrollArea className="px-3 py-2 border-s-4 ms-1 h-[75%]">
 				<div>
-					{planCards.map((plan, index) => (
-						<div className="" key={`${index}${plan}`}>
-							<div className="w-[30px] flex justify-center">
-								<div className="h-5 w-[0.15rem] rounded-full bg-gray-400" />
-							</div>
-							<PlanCard
-								task={plan.task}
-								type={plan.type}
-								duration={plan.duration}
-								time={plan.time}
-								importance={plan.importance}
-								percentage={plan.percentage}
-							/>
-						</div>
+					{planCards.length === 0 ?
+						<div>
 
-					))}
-					<div className="w-[30px] flex justify-center">
-						<div className="h-5 w-[0.15rem] rounded-full bg-gray-400" />
-					</div>
+							<div className="text-gray-400 text-center p-10">
+
+								Looks like you don't have a plan for the day. Plan the day by adding new tasks
+
+								{" "}  or {" "}
+
+								<								span className="underline">Use Existing Plan</span>
+								<div>
+								</div>
+							</div>
+						</div>
+						:
+						<>
+							{planCards.map((plan, index) => (
+								<div className="" key={`${index}${plan}`}>
+									<PlanCard
+										task={plan.task}
+										type={plan.type}
+										duration={plan.duration}
+										time={plan.time}
+										importance={plan.importance}
+										percentage={plan.percentage}
+									/>
+								</div>
+
+							))}
+
+						</>
+
+					}
+
 				</div>
 			</ScrollArea>
 			<div className="text-slate-400">Day End 10:00 AM</div>
 
 			<div className="mt-1 flex justify-end gap-2">
-				<Button>Saved Task</Button>
-				<Button variant={"destructive"}>Add Task</Button>
+				<Button className="font-Inter">Save Plan</Button>
+
+				<Dialog>
+					<DialogTrigger type="submit" className="bg-red-600 text-white rounded-md px-2">
+						<div>Add Tasks</div>
+					</DialogTrigger>
+					<DialogContent>
+						<DialogHeader>
+							<DialogTitle>Are you absolutely sure?</DialogTitle>
+							<DialogDescription>
+								This action cannot be undone. This will permanently delete your account
+								and remove your data from our servers.
+							</DialogDescription>
+						</DialogHeader>
+					</DialogContent>
+				</Dialog>
 			</div>
 		</div>
 	);

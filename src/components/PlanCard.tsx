@@ -44,10 +44,22 @@ function PlanCard({
 			className="flex justify-between rounded-lg py-0/5"
 			style={{ backgroundColor: importance_map[importance] }}
 		>
-			<div className="group flex gap-2 items-center text-[0.7rem]">
+
+			<div className="flex gap-2 items-center text-[0.7rem]">
+				<div className="flex flex-col gap-1.5">
+					<div className="w-[30px] flex justify-center">
+						<div className="h-3 w-[0.15rem] bg-black" />
+					</div>
+					<div className="group">
+
 					<Meter percentage={per} importance={importance} size={30} gap={4}>
 						<TypeFiller type={type} varient={"solid"} per={per} />
 					</Meter>
+					</div>
+					<div className="w-[30px] flex justify-center">
+						<div className="h-3 w-[0.15rem] bg-black" />
+					</div>
+				</div>
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger className="text-start text-sm font-Inter truncate ... w-32">
