@@ -19,6 +19,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
+import moment from "moment";
 
 interface Plans {
 	task: string,
@@ -28,7 +29,33 @@ interface Plans {
 	importance: number, // High importance
 	percentage: number,
 }
+function getDateRange() {
+	const currentDate = moment();
+	const inputDay = currentDate.date();
+	let startDay: number;
+	let endDay: number;
 
+	if (inputDay > 20) {
+		startDay = 20;
+		endDay = currentDate.daysInMonth() >= 31 ? 31 : 30;
+	} else if (inputDay > 10) {
+		startDay = 10;
+		endDay = 20;
+	} else {
+		startDay = 1;
+		endDay = 10;
+	}
+
+	const dates = [];
+
+	for (let day = startDay; day <= endDay; day++) {
+		const currentDate = moment().date(day);
+		const formattedDate = currentDate.format('Do MMM, ddd');
+		dates.push(formattedDate);
+	}
+
+	return dates;
+}
 function Plan() {
 	// const planCards = [
 	// 	{
@@ -121,6 +148,8 @@ function Plan() {
 	// 	},
 	// ];
 	const planCards: Plans[] = []
+	const dates = getDateRange()
+
 	return (
 		<div className="relative h-full bg-white rounded-2xl p-3">
 			<CircleHelp
@@ -145,16 +174,18 @@ function Plan() {
 					</Meter> */}
 				</div>
 				<div className="h-full pt-3">
-					{/* <Select>
+					<Select>
 						<SelectTrigger className="text-2xl text-[#8C8C8C]">
-							<SelectValue placeholder="5 Apr, Mon" className="" />
+							<SelectValue placeholder={moment().format('Do MMM, ddd')} className="" />
 						</SelectTrigger>
 						<SelectContent>
-
-							<SelectItem value="Today">5 Apr, Mon</SelectItem>
-							<SelectItem value="Tomorrow">Tomorrow</SelectItem>
+							{
+								dates.map(item => {
+									return <SelectItem key={item} value={item}>{item}</SelectItem>
+								})
+							}
 						</SelectContent>
-					</Select> */}
+					</Select>
 				</div>
 			</div>
 			<div className="flex gap-2 items-center mt-2">
@@ -172,7 +203,7 @@ function Plan() {
 
 								{" "}  or {" "}
 
-								<								span className="underline">Use Existing Plan</span>
+								<span className="underline">Use Existing Plan</span>
 								<div>
 								</div>
 							</div>
