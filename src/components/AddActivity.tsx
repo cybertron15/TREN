@@ -25,6 +25,7 @@ import {
 import { ScrollArea } from './ui/scroll-area';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 function AddActivity() {
     const [taskMode, settaskMode] = useState('select')
@@ -91,7 +92,15 @@ function AddActivity() {
 
                     <button name="create" onClick={handleTaskModeToggle} className={`basis-1/2 items-center flex justify-center gap-1 ${taskMode === "create" && "ring-1 ring-red-300"}  rounded-r-md`} type="button">
                         Create Task
-                        <CircleHelp className='text-gray-400' size={"15"} />
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger onClick={(e)=>e.stopPropagation()}><CircleHelp className='text-gray-400' size={"15"} /></TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Tasks are anything, that you do on daily basis</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        
                     </button>
 
                 </div>
