@@ -1,25 +1,19 @@
-import { CircleHelp, CirclePlus, Settings2 } from "lucide-react";
-import React from "react";
+import { CircleHelp, CirclePlus, Edit, Pen, RotateCcw, Settings2, Trash } from "lucide-react";
+import React, { useRef, useState } from "react";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "./ui/select";
+} from "./ui/select-mod";
 import Meter from "./Meter";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import PlanCard from "./PlanCard";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog"
+
 import moment from "moment";
+import AddActivity from "./AddActivity";
 
 interface Plans {
 	task: string,
@@ -56,6 +50,7 @@ function getDateRange() {
 
 	return dates;
 }
+
 function Plan() {
 	// const planCards = [
 	// 	{
@@ -149,7 +144,7 @@ function Plan() {
 	// ];
 	const planCards: Plans[] = []
 	const dates = getDateRange()
-
+	
 	return (
 		<div className="relative h-full bg-white rounded-2xl p-3">
 			<CircleHelp
@@ -162,16 +157,6 @@ function Plan() {
 			<div className="flex gap-2 items-center">
 				<div className="flex gap-2">
 					<div className="font-Inter text-4xl mt-2">Plan</div>
-					{/* <Meter
-						percentage={100}
-						size={52}
-						importance={4}
-						conicDiff={5}
-						conincStart={85}
-						gap={0}
-					>
-						<img src="/icons/target.png" alt="" className="mb-2.5 ms-2.5" />
-					</Meter> */}
 				</div>
 				<div className="h-full pt-3">
 					<Select>
@@ -234,21 +219,8 @@ function Plan() {
 
 			<div className="mt-1 flex justify-end gap-2">
 				<Button className="font-Inter">Save Plan</Button>
-
-				<Dialog>
-					<DialogTrigger type="submit" className="bg-red-600 text-white rounded-md px-2">
-						<div>Add Tasks</div>
-					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>
-							<DialogTitle>Are you absolutely sure?</DialogTitle>
-							<DialogDescription>
-								This action cannot be undone. This will permanently delete your account
-								and remove your data from our servers.
-							</DialogDescription>
-						</DialogHeader>
-					</DialogContent>
-				</Dialog>
+				<AddActivity />
+				
 			</div>
 		</div>
 	);
