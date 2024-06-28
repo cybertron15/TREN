@@ -42,7 +42,6 @@ export default function GoalCard({
 	function getWorkedFormatedDuration(duration: string) {
 		let day = 0
 		const fragments = duration.split(" ")
-		console.log(fragments);
 		
 		if (fragments.length > 1){
 			day =  Number.parseInt(fragments[0])
@@ -128,7 +127,7 @@ export default function GoalCard({
 				<div className="flex gap-1 items-center">
 					<Meter
 						percentage={per}
-						importance={importance}
+						importance={Number.parseFloat(importance)}
 						size={65}
 						gap={12}
 						conincStart={85}

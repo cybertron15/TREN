@@ -33,7 +33,7 @@ function TypeFiller({ type, per, varient="" }) {
 									: per_colors.bad,
 					}}
 				>
-					<span>{per}%</span>
+					<span>{per || "0"}%</span>
 				</div>
 			</div>
 		</>

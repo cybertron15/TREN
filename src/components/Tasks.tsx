@@ -285,8 +285,10 @@ function Tasks() {
 	const {tasks} = useLoaderData() as LoaderData
 	
 	const taskList: Tasks[] = tasks.data
+	console.log(taskList);
+	
 	const navigation = useNavigation()
-
+	
 	return (
 		<div className="rounded-2xl bg-white h-full flex flex-col">
 			<div className="relative flex mb-1 p-3">
@@ -297,13 +299,13 @@ function Tasks() {
 					opacity={"50%"}
 				/>
 				<div className="flex items-center gap-1">
-					<div className="font-Inter text-4xl">Activities</div>
+					<div className="font-Inter text-4xl">Tasks</div>
 					<div className="bg-red-500 w-7 h-7 rounded-full justify-center text-white font-PlexMono mt-1 flex items-center text-sm">
-						{taskList.length}
+						{tasks.success?taskList.length:"0"}
 					</div>
 				</div>
 				<div className="h-full flex items-end mt-1">
-					<Select>
+					{/* <Select>
 						<SelectTrigger className="text-2xl text-[#8C8C8C]">
 							<SelectValue placeholder="Day 1" />
 						</SelectTrigger>
@@ -319,7 +321,7 @@ function Tasks() {
 							<SelectItem value={"Day 9"}>Day 9</SelectItem>
 							<SelectItem value={"Day 10"}>Day 10</SelectItem>
 						</SelectContent>
-					</Select>
+					</Select> */}
 				</div>
 			</div>
 
