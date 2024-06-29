@@ -15,7 +15,7 @@ type Props = {
 	completion: number;
 	deadline: string;
 	category: string;
-	priority:string
+	priority: string
 	name: string;
 	importance: string;
 	workedFor: string;
@@ -29,27 +29,27 @@ export default function GoalCard({
 	priority,
 	name,
 	importance,
-	workedFor 
+	workedFor
 }: Props) {
 	const [per, setpercentage] = useState(completion);
 	const targetDate = moment(deadline);
 	const now = moment()
 	const [timeLeft, settimeLeft] = useState(getDateParts(moment.duration(targetDate.diff(now))));
 	// console.log(workedFor);
-	
+
 	// console.log(getDateParts(moment.duration(moment(deadline).second())));
-	
+
 	function getWorkedFormatedDuration(duration: string) {
 		let day = 0
 		const fragments = duration.split(" ")
-		
-		if (fragments.length > 1){
-			day =  Number.parseInt(fragments[0])
-			const [hour , minutes, seconds] = fragments[1].split(":")
+
+		if (fragments.length > 1) {
+			day = Number.parseInt(fragments[0])
+			const [hour, minutes, seconds] = fragments[1].split(":")
 			return `${day}d ${hour}h ${minutes}m`
 		}
-		const [hour , minutes, seconds] = fragments[0].split(":")
-			return `${day}d ${hour}h ${minutes}m`
+		const [hour, minutes, seconds] = fragments[0].split(":")
+		return `${day}d ${hour}h ${minutes}m`
 	}
 	// const importance_map = {
 	// 	1: "#F6E5D9",
@@ -70,7 +70,7 @@ export default function GoalCard({
 		brain: "brain.png",
 	};
 
-	function getDateParts(duration: moment.Duration){
+	function getDateParts(duration: moment.Duration) {
 		// Extract days, hours, minutes, and seconds from the duration
 		const days = Math.floor(duration.asDays());
 		const hours = duration.hours();
@@ -88,8 +88,8 @@ export default function GoalCard({
 			const duration = moment.duration(targetDate.diff(now)); // Time remaining
 			if (duration.asSeconds() <= 0) {
 				clearInterval(updateCountdown);
-			} 
-			else{
+			}
+			else {
 				settimeLeft(getDateParts(duration))
 			}
 		}, 60000);
@@ -106,8 +106,7 @@ export default function GoalCard({
 			<div className="flex gap-1 w-full justify-between">
 				<div className="flex gap-4">
 					<div className="flex flex-col justify-center">
-						<span className="text-lg font-Inter font-bold text-[#E70000]">{`${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m left`}</span>
-
+						<span className="text-lg font-Inter font-bold text-[#E70000]">{`${timeLeft.days <= 0 ? 0 : timeLeft.days}d ${timeLeft.hours <= 0 ? 0 : timeLeft.hours}h ${timeLeft.minutes <= 0 ? 0 : timeLeft.minutes}m left`}</span>
 						<TooltipProvider>
 							<Tooltip>
 								<TooltipTrigger className="text-base text-start font-Inter truncate ... max-w-48 mb-1">
