@@ -9,6 +9,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "./ui/tooltip";
+import { Badge } from "./ui/badge";
 
 type Props = {
 	id: string;
@@ -101,8 +102,9 @@ export default function GoalCard({
 
 	return (
 		<div
-			className="group flex rounded-lg p-2 pe-0 my-2"
+			className={`relative group flex rounded-lg p-2 pe-0 my-2 ${(timeLeft.days <= 0 && timeLeft.hours <= 0 && timeLeft.minutes <= 0) && "animate-pulse"}`}
 		>
+			{(timeLeft.days <= 0 && timeLeft.hours <= 0 && timeLeft.minutes <= 0) && <Badge className="absolute right-0 top-2">Due</Badge>}
 			<div className="flex gap-1 w-full justify-between">
 				<div className="flex gap-4">
 					<div className="flex flex-col justify-center">
