@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -27,7 +27,7 @@ import { Button } from './ui/button';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import axiosInstance from '@/utils/axiousInstance';
-import { Form } from 'react-router-dom';
+import { Form, useActionData, useSubmit } from 'react-router-dom';
 
 function AddActivity() {
     const [taskMode, settaskMode] = useState('select')
@@ -38,7 +38,7 @@ function AddActivity() {
     const [selectedTask, setselectedTask] = useState("")
     const [userGoals, setuserGoals] = useState<GroupedGoals | null>(null)
     const [userTasks, setuserTasks] = useState<Tasks[] | null>(null)
-    const [inputs, setinputs] = useState({
+    const initial_input = {
         activityName: "",
         from: "",
         to: "",
@@ -48,24 +48,18 @@ function AddActivity() {
         taskRelatedGoal: "",
         taskCategory: "",
         taskPriority: ""
-    })
-    const tasks = [
-        { id: "1", name: "Budget Planning", category: "money" },
-        { id: "2", name: "Weightlifting", category: "strength" },
-        { id: "3", name: "Memory Training", category: "brain" },
-        { id: "4", name: "Investment Analysis", category: "money" },
-        { id: "5", name: "Cardio Workout", category: "strength" },
-        { id: "6", name: "Puzzle Solving", category: "brain" },
-        { id: "7", name: "Expense Tracking", category: "money" },
-        { id: "8", name: "Strength Training", category: "strength" },
-        { id: "9", name: "Reading Comprehension", category: "brain" },
-        { id: "10", name: "Tax Preparation", category: "money" }
-    ]
+    }
+    const [inputs, setinputs] = useState(initial_input)
+    const submit = useSubmit()
+    const response = useActionData() as {msg:string,success:string}
 
-    // const formValidation = () =>{
-    //     let validated = false
-
-    // }
+    useEffect(() => {
+      if (response) {
+        toast(response.msg)
+      }
+    
+    }, [response])
+    
     const handleGoalClear = () => {
         setGoal('')
         setCategory('')
@@ -109,6 +103,27 @@ function AddActivity() {
         handleTaskModeToggle(event)
         getGoals()
     }
+
+    const handleSubmit = (event:  React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Prevent the default form submission
+    
+        // Create a new FormData object
+        const formData = new FormData();
+        formData.append('taskMode', inputs.taskMode )
+        formData.append('activityName', inputs.activityName)
+        formData.append('from', inputs.from)
+        formData.append('to', inputs.to)
+        formData.append('taskId', inputs.taskId)
+        formData.append('taskName', inputs.taskName)
+        formData.append('taskRelatedGoal', inputs.taskRelatedGoal)
+        formData.append('taskCategory', inputs.taskCategory)
+        formData.append('taskPriority', inputs.taskPriority)
+    
+        // Submit the form data using the useSubmit hook
+        submit(formData, { method: 'post' });
+        setinputs(initial_input)
+      };
+      
     interface Goal {
         id: string;
         name: string;
@@ -184,7 +199,7 @@ function AddActivity() {
                         Create Activity based on tasks.
                     </DialogDescription>
                 </DialogHeader>
-                <Form method='POST' className='flex flex-col gap-3'>
+                <Form method='POST' onSubmit={handleSubmit} className='flex flex-col gap-3'>
                     <div>
                         <Label htmlFor="name">Name</Label>
                         <Input maxLength={30} className='mt-1' onChange={handleInputChange} name='activityName' placeholder="Workout for 2 hours" required/>
