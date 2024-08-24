@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -6,6 +6,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose
 } from "@/components/ui/dialog"
 import { CircleHelp, Pen, RotateCcw, Trash } from "lucide-react";
 
@@ -39,9 +40,9 @@ function AddActivity() {
     const [userGoals, setuserGoals] = useState<GroupedGoals | null>(null)
     const [userTasks, setuserTasks] = useState<Tasks[] | null>(null)
     const initial_input = {
-        activityName: "",
-        from: "",
-        to: "",
+        activityName: "test",
+        from: "13:00",
+        to: "13:00",
         taskMode: "select",
         taskId: "",
         taskName: "",
@@ -50,16 +51,17 @@ function AddActivity() {
         taskPriority: ""
     }
     const [inputs, setinputs] = useState(initial_input)
+    const [addActivityStatus, setAddActivityStatus] = useState(false)
     const submit = useSubmit()
-    const response = useActionData() as {msg:string,success:string}
-
+    const response = useActionData() as { msg: string, success: string }
+    const closeActivity = useRef<HTMLButtonElement | null>(null);
     useEffect(() => {
-      if (response) {
-        toast(response.msg)
-      }
-    
+        if (response) {
+            toast(response.msg)
+        }
+
     }, [response])
-    
+
     const handleGoalClear = () => {
         setGoal('')
         setCategory('')
@@ -104,12 +106,12 @@ function AddActivity() {
         getGoals()
     }
 
-    const handleSubmit = (event:  React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission
-    
+
         // Create a new FormData object
         const formData = new FormData();
-        formData.append('taskMode', inputs.taskMode )
+        formData.append('taskMode', inputs.taskMode)
         formData.append('activityName', inputs.activityName)
         formData.append('from', inputs.from)
         formData.append('to', inputs.to)
@@ -118,12 +120,18 @@ function AddActivity() {
         formData.append('taskRelatedGoal', inputs.taskRelatedGoal)
         formData.append('taskCategory', inputs.taskCategory)
         formData.append('taskPriority', inputs.taskPriority)
-    
+
         // Submit the form data using the useSubmit hook
         submit(formData, { method: 'post' });
-        setinputs(initial_input)
-      };
-      
+        if (inputs.taskMode==="select" && inputs.taskId!==""){
+            setinputs(initial_input)
+            setselectedTask("")
+        }
+        if (inputs.taskMode==="create"){
+            setinputs(initial_input)
+        }
+    };
+
     interface Goal {
         id: string;
         name: string;
@@ -184,7 +192,12 @@ function AddActivity() {
             setisLoading(false)
         }
     }
-    
+
+    const handleAddActivity = () =>{
+        if (closeActivity.current!==null){
+        closeActivity?.current.click()
+    }
+    }
 
     return (
         <Dialog onOpenChange={(open) => { handleDialogClear() }}>
@@ -193,6 +206,7 @@ function AddActivity() {
             </DialogTrigger>
 
             <DialogContent className='max-h-[100%] overflow-y-auto overflow-x-clip'>
+            <DialogClose ref={closeActivity} />
                 <DialogHeader>
                     <DialogTitle>Add Activity</DialogTitle>
                     <DialogDescription>
@@ -202,22 +216,20 @@ function AddActivity() {
                 <Form method='POST' onSubmit={handleSubmit} className='flex flex-col gap-3'>
                     <div>
                         <Label htmlFor="name">Name</Label>
-                        <Input maxLength={30} className='mt-1' onChange={handleInputChange} name='activityName' placeholder="Workout for 2 hours" required/>
+                        <Input maxLength={30} className='mt-1' value={inputs.activityName} onChange={handleInputChange} name='activityName' placeholder="Workout for 2 hours" required />
                     </div>
                     <div className="flex gap-2 w-full">
                         <div className="basis-1/2">
                             <Label htmlFor="From" className="">From</Label>
-                            <Input name='from'  className='mt-1' onChange={handleInputChange} placeholder="from" type="time" min="12:00" max="18:00" required/>
+                            <Input name='from' className='mt-1' value={inputs.from} onChange={handleInputChange} placeholder="from" type="time" min="12:00" max="18:00" required />
                         </div>
                         <div className="basis-1/2">
                             <Label htmlFor="To" className="">To</Label>
-                            <Input name='to'  className='mt-1' onChange={handleInputChange} placeholder="to" type="time" min="12:00" max="18:00" required/>
+                            <Input name='to' className='mt-1' value={inputs.to} onChange={handleInputChange} placeholder="to" type="time" min="12:00" max="18:00" required />
                         </div>
                     </div>
                     <hr />
                     <div>
-
-
                         <Label htmlFor="name" className="">Choose Task</Label>
                         <div className="flex w-full border rounded-md mt-1">
                             <button value="select" name='taskMode' onClick={handleTaskModeToggle} className={`basis-1/2 ${taskMode === "select" && "ring-1 ring-red-300"}  rounded-l-md`} type="button">Select Task</button>
@@ -231,32 +243,35 @@ function AddActivity() {
                     </div>
                     {
                         taskMode === "select" ?
-                            <ScrollArea className="h-[290px] rounded-md border p-3">
-                                {
-                                    (!isLoading && userTasks) &&
-                                    userTasks.map((task: Tasks) => {
-                                        return <div key={task.id} className={`flex justify-between p-2 border rounded-md items-center my-1 ${selectedTask === task.id && " border-red-500"}`}>
-                                            <div className="flex items-center gap-2">
-                                                <img src={`icons/${task.category}-solid.png`} alt="" className="w-4 h-4" />
-                                                <div>
-                                                    {task.name}
+                            <>
+                                <ScrollArea className="h-[290px] rounded-md border p-3">
+                                    {
+                                        (!isLoading && userTasks) &&
+                                        userTasks.map((task: Tasks) => {
+                                            return <div key={task.id} className={`flex justify-between p-2 border rounded-md items-center my-1 ${selectedTask === task.id && " border-red-500"}`}>
+                                                <div className="flex items-center gap-2">
+                                                    <img src={`icons/${task.category}-solid.png`} alt="" className="w-4 h-4" />
+                                                    <div>
+                                                        {task.name}
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    {/* <Pen color="grey " cursor={"pointer"} className="hover:text-red-500 w-4 h-4" /> */}
+                                                    <Trash color="grey" cursor={"pointer"} className="hover:text-red-500 w-4 h-4" />
+                                                    <Checkbox key={task.id} disabled={selectedTask === "" ? false : selectedTask === task.id ? false : true} className="w-4 h-4" onCheckedChange={(checked) => { checked ? handleTaskChecked(task.id) : handleTaskChecked("") }} />
                                                 </div>
                                             </div>
-                                            <div className="flex gap-2">
-                                                {/* <Pen color="grey " cursor={"pointer"} className="hover:text-red-500 w-4 h-4" /> */}
-                                                <Trash color="grey" cursor={"pointer"} className="hover:text-red-500 w-4 h-4" />
-                                                <Checkbox disabled={selectedTask === "" ? false : selectedTask === task.id ? false : true} className="w-4 h-4" onCheckedChange={(checked) => { checked ? handleTaskChecked(task.id) : handleTaskChecked("") }} />
-                                            </div>
-                                        </div>
-                                    })
-                                }
+                                        })
+                                    }
 
-                            </ScrollArea>
+                                </ScrollArea>
+                                <Button type='submit' onClick={handleAddActivity}>Add</Button>
+                            </>
                             :
                             <>
                                 <div>
                                     <Label htmlFor="taskname" className="">Task Name</Label>
-                                    <Input maxLength={30} placeholder="Workout"  className='mt-1' name='taskName' onChange={handleInputChange} required />
+                                    <Input maxLength={30} placeholder="Workout" className='mt-1' name='taskName' onChange={handleInputChange} required />
                                 </div>
                                 <div>
                                     <div className="flex gap-2 items-center">
@@ -284,7 +299,7 @@ function AddActivity() {
                                 </div>
                                 <div>
                                     <Label htmlFor="category" className="">Category</Label>
-                                    <Select value={category===""?undefined:category} disabled={goal !== ""} onValueChange={handleCategoryValueChange} required>
+                                    <Select value={category === "" ? undefined : category} disabled={goal !== ""} onValueChange={handleCategoryValueChange} required>
                                         <SelectTrigger className='mt-1'>
                                             <SelectValue placeholder="Select category" />
                                         </SelectTrigger>
@@ -309,13 +324,11 @@ function AddActivity() {
                                         </SelectContent>
                                     </Select>
                                 </div>
-
+                                <Button type='submit'>Add</Button>
                             </>
 
                     }
-                    <Button type='submit' onClick={() => {
-                        console.log('button');
-                    }}>Add</Button>
+
                 </Form>
             </DialogContent>
 
@@ -324,3 +337,7 @@ function AddActivity() {
 }
 
 export default AddActivity
+
+function async() {
+    throw new Error('Function not implemented.');
+}
