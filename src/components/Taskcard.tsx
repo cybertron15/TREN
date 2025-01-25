@@ -97,7 +97,8 @@ export default function Taskcard({
 						</div>
 						<div className="flex text-xs font-Inter text-[#8C8C8C]">
 							<span>
-							{stringTo12hrFormatTimeString(startTime)} | {`${duration.slice(0,2)} hr ${duration.slice(3,5)} m`}
+							{/* {stringTo12hrFormatTimeString(startTime)} | {`${duration.slice(0,2)} hr ${duration.slice(3,5)} m`} */}
+							{stringTo12hrFormatTimeString("00:00:00")} | {`${"00"} hr ${"00"} m`}
 							</span>
 						</div>
 					</div>
@@ -115,7 +116,7 @@ export default function Taskcard({
 											: per_colors.bad,
 							}}
 						>
-							{per}%
+							{per?per:"0"}%
 						</div>
 					</div>
 					<Meter

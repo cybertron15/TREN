@@ -285,7 +285,7 @@ function Tasks() {
 	const {tasks} = useLoaderData() as LoaderData
 	
 	const taskList: Tasks[] = tasks.data
-	console.log(taskList);
+	// console.log(taskList);
 	
 	const navigation = useNavigation()
 	

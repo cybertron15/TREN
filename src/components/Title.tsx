@@ -3,13 +3,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function Title() {
 	return (
-		<div className="flex gap-2 bg-white rounded-xl px-4 justify-between">
-			<div className="flex items-center text-8xl font-JetBrainsMono ">
-				<span className="first-letter:text-black text-red-500">TREN</span> 
+		<div className="flex gap-4 bg-white rounded-xl px-1 justify-between w-full">
+			<div className="flex flex-col justify-center font-JetBrainsMono h-full">
+				<span className=" text-black text-[50px] leading-none">FEB</span> 
+				<span className=" text-black text-[30px] leading-none">TRE<span className="text-red-500">N2</span> </span> 
 			</div>
-			<div className="flex items-center">
-				<Avatar className="w-20 h-20 ring-4 ring-red-500">
-					<AvatarImage src="https://github.com/shadcn.png" />
+			<div className="flex items-center py-3">
+				<Avatar className="w-full h-full ring-4 ring-red-500">
+					<AvatarImage src="/avatar.png" />
 					<AvatarFallback>CN</AvatarFallback>
 				</Avatar>
 			</div>

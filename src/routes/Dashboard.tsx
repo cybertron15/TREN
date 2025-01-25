@@ -20,7 +20,7 @@ import {
 	NotebookPen,
 } from "lucide-react";
 import React from "react";
-import { Link, redirect, type LoaderFunctionArgs } from "react-router-dom";
+import { type ActionFunctionArgs, Link, redirect, type LoaderFunctionArgs } from "react-router-dom";
 
 function Dashbaord() {
 	return (
@@ -135,11 +135,15 @@ async function loader({ params, request }: LoaderFunctionArgs) {
 	if (!isLoggedIn()) {
 		return redirect("/login")
 	}
-	const result = { tasks: { success: false, data: "failed to fetch tasks" }, goals: { success: false, data: "failed to fetch goals" }, plan: { success: false, data: "failed to fetch plan" } }
+	const result = { 
+		tasks: { success: false, data: "failed to fetch tasks" }, 
+		goals: { success: false, data: "failed to fetch goals" }, 
+		plan: { success: false, data: "failed to fetch plan" } 
+	}
 	try {
 		const response = await axiosInstance.get('/tasks')
 		result.tasks.success = true
-		result.tasks.data =  response.data
+		result.tasks.data = response.data
 
 	} catch (error) {
 		console.log("failed to fetch tasks", error)
@@ -148,22 +152,55 @@ async function loader({ params, request }: LoaderFunctionArgs) {
 	try {
 		const response = await axiosInstance.get('/goals')
 		result.goals.success = true
-		result.goals.data =  response.data
+		result.goals.data = response.data
 
 	} catch (error) {
 		console.log("failed to fetch goals", error)
 	}
 
-	try {
-		const response = await axiosInstance.get('/plan')
-		result.plan.success = true
-		result.plan.data =  response.data
+	// try {
+	// 	const response = await axiosInstance.get('/plans')
+	// 	result.plan.success = true
+	// 	result.plan.data = response.data
+	// 	console.log(result.plan.data);
 
-	} catch (error) {
-		console.log("failed to fetch plans", error)
-	}
+	// } catch (error) {
+	// 	console.log("failed to fetch plans", error)
+	// }
 
 	return result
 }
-export { loader }
+
+async function action({ params, request }: ActionFunctionArgs) {
+	const formData = await request.formData();
+	const activityName = formData.get('activityName')
+	const from = formData.get('from')
+	const to = formData.get('to')
+	const taskMode = formData.get('taskMode')
+	const taskId = formData.get('taskId')
+	const taskName = formData.get('taskName')
+	const taskRelatedGoal = formData.get('taskRelatedGoal')
+	const taskCategory = formData.get('taskCategory')
+	const taskPriority = formData.get('taskPriority')
+
+	if (taskMode === "select") {
+		if (taskId === "") {
+			return { success: false, msg: "No task selected" }
+		}
+
+		if (activityName === "" || from === "" || to === "") {
+			return { success: false, msg: "Please fill all required fields" }
+		}
+
+		const data = {formData, activityName, from, to, taskMode, taskId, taskName, taskRelatedGoal, taskCategory, taskPriority}
+		console.log(data);
+		
+		// axiosInstance.post('/activity/')
+	}
+
+
+	return { success: true, msg: "Activity added" }
+
+}
+export { loader, action }
 export default Dashbaord;

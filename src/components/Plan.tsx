@@ -15,6 +15,13 @@ import PlanCard from "./PlanCard";
 import moment from "moment";
 import AddActivity from "./AddActivity";
 
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
+
 interface Plans {
 	task: string,
 	type: string,
@@ -144,7 +151,7 @@ function Plan() {
 	// ];
 	const planCards: Plans[] = []
 	const dates = getDateRange()
-	
+
 	return (
 		<div className="relative h-full bg-white rounded-2xl p-3">
 			<CircleHelp
@@ -157,6 +164,26 @@ function Plan() {
 			<div className="flex gap-2 items-center">
 				<div className="flex gap-2">
 					<div className="font-Inter text-4xl mt-2">Plan</div>
+					<HoverCard>
+						<HoverCardTrigger className="cursor-pointer">
+							<Meter
+								percentage={100}
+								size={52}
+								importance={4}
+								conicDiff={5}
+								conincStart={85}
+								gap={0}
+							>
+								<img src="/icons/target.png" alt="" className="mb-2.5 ms-2.5" />
+							</Meter>
+						</HoverCardTrigger>
+						<HoverCardContent>
+							Current Plan Details
+							---
+
+							Weekly Plan Details
+						</HoverCardContent>
+					</HoverCard>
 				</div>
 				<div className="h-full pt-3">
 					<Select>
@@ -220,7 +247,7 @@ function Plan() {
 			<div className="mt-1 flex justify-end gap-2">
 				<Button className="font-Inter">Save Plan</Button>
 				<AddActivity />
-				
+
 			</div>
 		</div>
 	);
