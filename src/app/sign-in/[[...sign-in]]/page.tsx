@@ -66,7 +66,7 @@ export default function Page() {
 
           <motion.div className="space-y-4" variants={containerVariants}>
             {features.map((feature, index) => (
-              <motion.div key={index} className="flex items-center space-x-3" variants={itemVariants}>
+              <motion.div key={`${index}-${feature.text}`} className="flex items-center space-x-3" variants={itemVariants}>
                 <feature.icon className="w-6 h-6 text-white" />
                 <span className="text-white/90">{feature.text}</span>
               </motion.div>
