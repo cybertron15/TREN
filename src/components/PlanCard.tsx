@@ -83,7 +83,7 @@ function PlanCard({
                 </button>
             </div>
         </div>
-    );
+    ); 	
 }
 
 export default PlanCard;

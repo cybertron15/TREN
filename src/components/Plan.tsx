@@ -31,7 +31,8 @@ interface Plans {
 function getDateRange() {
     const today = new Date();
     const day = today.getDate();
-    let startDay, endDay;
+    let startDay;
+    let endDay;
 
     if (day > 20) {
         startDay = 20;
