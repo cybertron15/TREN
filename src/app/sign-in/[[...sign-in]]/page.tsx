@@ -38,7 +38,7 @@ const itemVariants = {
 
 export default function Page() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F44949] via-[#FF7676] to-[#FFA8A8] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#F44949] via-[#FF7676] to-[#FFA8A8] p-4">
       <motion.div
         className="w-full max-w-6xl p-8 flex flex-col md:flex-row gap-8 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl border border-white border-opacity-20"
         initial="hidden"

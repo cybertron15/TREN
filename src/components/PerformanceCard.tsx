@@ -96,7 +96,7 @@ function PerformanceCard({task, work, plan, reasons, type, duration, complition}
 					<div className="flex gap-2 mt-4 w-full hidden">
 						<Button
 							variant={"outline"}
-							className="hover:border-red-500 flex-grow"
+							className="hover:border-red-500 grow"
 							onClick={() => {
 								settoggleEditMode(!toggleEditMode);
 							}}
@@ -107,7 +107,7 @@ function PerformanceCard({task, work, plan, reasons, type, duration, complition}
 							onClick={() => {
 								settoggleEditMode(!toggleEditMode);
 							}}
-							className="flex-grow"
+							className="grow"
 						>
 							Save
 						</Button>
