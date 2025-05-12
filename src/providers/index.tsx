@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { NhostProvider } from "@nhost/nextjs"
 import { nhost } from '../lib/nhost'
 import { SidebarProvider } from '@/components/ui/sidebar'
+import { ThemeProvider } from 'next-themes'
 
 interface ProviderProps {
   children: React.ReactNode
@@ -10,14 +11,16 @@ interface ProviderProps {
 
 const Provider: React.FC<ProviderProps> = ({ children }) => {
   return (
-    <NhostProvider nhost={nhost}>
-      <ClerkProvider>
-        <SidebarProvider>
+    <ThemeProvider enableSystem>
+      <NhostProvider nhost={nhost}>
+        <ClerkProvider>
+          <SidebarProvider>
 
-          {children}
-        </SidebarProvider>
-      </ClerkProvider>
-    </NhostProvider>
+            {children}
+          </SidebarProvider>
+        </ClerkProvider>
+      </NhostProvider>
+    </ThemeProvider>
   )
 }
 
