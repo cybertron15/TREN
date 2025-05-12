@@ -8,7 +8,7 @@ import {
   PieChart,
 } from "lucide-react"
 
-import { Nav } from "@/components/nav-projects"
+import { Nav } from "@/components/nav"
 import { NavUser } from "@/components/nav-user"
 import { LogoDisplay } from "@/components/team-switcher"
 import {

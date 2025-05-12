@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useState } from "react"
 
 export function Nav({
   items,
@@ -22,15 +23,17 @@ export function Nav({
   }[]
 }) {
 
+  const [selected, setselected] = useState("Dashboard")
+
   return (
     <SidebarGroup >
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <a href={item.url} className="flex items-center">
-                <item.icon className="" style={{width:"18px",height:"18px"}}/>
-                <span className="font-medium mt-0.5">{item.name}</span>
+            <SidebarMenuButton onClick={()=>setselected(item.name)} className={`${selected === item.name && "bg-sidebar-accent"}`} asChild>
+              <a href={item.url} className={`flex items-center`}>
+                <item.icon style={{width:"18px",height:"18px"}} className={`${selected === item.name && "text-sidebar-accent-foreground"}`}/>
+                <span className={`font-medium mt-0.5 ${selected === item.name && "text-sidebar-accent-foreground"}`}>{item.name}</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

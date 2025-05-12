@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-	
+
 	return (
 		<>
 			<AppSidebar />
@@ -38,13 +38,21 @@ export default function Page() {
 					<ToggleTheme />
 				</header>
 				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-					<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-						<div className="bg-muted/50 aspect-video rounded-xl" />
-						<div className="bg-muted/50 aspect-video rounded-xl" />
-						<div className="bg-muted/50 aspect-video rounded-xl" />
-					</div>
-					<div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-				</div>
+  {/* Top section - naturally sized (fixed height or content-based) */}
+  <div className="grid auto-rows-min gap-4 md:grid-cols-12">
+    <div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
+    <div className="bg-muted/50 md:col-span-4 rounded-xl h-[40vh]" />
+    <div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
+    <div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh]" />
+  </div>
+
+  {/* Bottom section - grows to fill available space */}
+  <div className="grid gap-4 md:grid-cols-12 flex-1">
+    <div className="bg-muted/50 col-span-3 rounded-xl" />
+    <div className="bg-muted/50 col-span-9 rounded-xl" />
+  </div>
+</div>
+
 			</SidebarInset>
 		</>
 	)
