@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import BarChartContainer from "@/components/dashboard/barchart-container";
 import ToggleTheme from "@/components/toggle-theme";
 import {
 	Breadcrumb,
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-
 	return (
 		<>
 			<AppSidebar />
@@ -38,20 +38,22 @@ export default function Page() {
 					<ToggleTheme />
 				</header>
 				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-  {/* Top section - naturally sized (fixed height or content-based) */}
-  <div className="grid auto-rows-min gap-4 md:grid-cols-12">
-    <div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
-    <div className="bg-muted/50 md:col-span-4 rounded-xl h-[40vh]" />
-    <div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
-    <div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh]" />
-  </div>
+					{/* Top section - naturally sized (fixed height or content-based) */}
+					<div className="grid auto-rows-min gap-4 md:grid-cols-12">
+						<div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
+						<div className="relative bg-muted/50 md:col-span-4 rounded-xl md:h-[40vh] p-4" >
+							<BarChartContainer />
+						</div>
+						<div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
+						<div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh]" />
+					</div>
 
-  {/* Bottom section - grows to fill available space */}
-  <div className="grid gap-4 md:grid-cols-12 flex-1">
-    <div className="bg-muted/50 col-span-3 rounded-xl" />
-    <div className="bg-muted/50 col-span-9 rounded-xl" />
-  </div>
-</div>
+					{/* Bottom section - grows to fill available space */}
+					<div className="grid gap-4 md:grid-cols-12 flex-1">
+						<div className="bg-muted/50 col-span-3 rounded-xl" />
+						<div className="bg-muted/50 col-span-9 rounded-xl" />
+					</div>
+				</div>
 
 			</SidebarInset>
 		</>
