@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import BarChartContainer from "@/components/dashboard/barchart-container";
+import PieChartContainer from "@/components/dashboard/piechart-container";
 import ToggleTheme from "@/components/toggle-theme";
 import {
 	Breadcrumb,
@@ -44,7 +45,9 @@ export default function Page() {
 						<div className="relative bg-muted/50 md:col-span-4 rounded-xl md:h-[40vh] p-4" >
 							<BarChartContainer />
 						</div>
-						<div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh]" />
+						<div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh] md:h-[40vh] p-4">
+							<PieChartContainer />
+						</div>
 						<div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh]" />
 					</div>
 
