@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import BarChartContainer from "@/components/dashboard/barchart-container";
 import PieChartContainer from "@/components/dashboard/piechart-container";
+import TasksContainer from "@/components/dashboard/tasks-container";
 import TimerContainer from "@/components/dashboard/timer-contaier";
 import ToggleTheme from "@/components/toggle-theme";
 import { Separator } from "@/components/ui/separator"
@@ -40,15 +41,19 @@ export default function Page() {
 						<div className="relative bg-muted/50 md:col-span-4 rounded-xl md:h-[40vh] p-4" >
 							<BarChartContainer />
 						</div>
-						<div className="bg-muted/50 md:col-span-3 rounded-xl h-[40vh] md:h-[40vh] p-4">
+						<div className="bg-muted/50 md:col-span-3 rounded-xl md:h-[40vh] p-4">
 							<PieChartContainer />
 						</div>
-						<div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh]" />
+						<div className="bg-muted/50 md:col-span-2 rounded-xl md:h-[40vh]" >
+							
+						</div>
 					</div>
 
 					{/* Bottom section - grows to fill available space */}
-					<div className="grid gap-4 md:grid-cols-12 flex-1">
-						<div className="bg-muted/50 col-span-3 rounded-xl" />
+					<div className="grid gap-4 md:grid-cols-12">
+						<div className="bg-muted/50 col-span-3 rounded-xl p-4" >
+							<TasksContainer />
+						</div>
 						<div className="bg-muted/50 col-span-9 rounded-xl" />
 					</div>
 				</div>
