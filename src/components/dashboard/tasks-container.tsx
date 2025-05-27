@@ -1,108 +1,129 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Taskcard from './task-card';
 import { ScrollArea } from '../ui/scroll-area';
 
 function TasksContainer() {
-     const tasks = [
+    const tasks = [
         {
             task: "Write blog post on AI agents",
+            goal: "Build in public",
             category: "Content",
-            duration: "2h",
+            duration: { hours: 2, minutes: 0, seconds: 0 },
+            selected: true,
             startTime: "09:00",
             completion: 80,
             subtasks: true,
-            priority: 2
+            priority: 2,
         },
         {
             task: "Fix navbar bug on landing page",
+            goal: "Build in public",
             category: "Development",
-            duration: "1.5h",
+            duration: { hours: 1, minutes: 30, seconds: 0 },
+            selected: false,
             startTime: "11:00",
             completion: 60,
             subtasks: false,
-            priority: 1
+            priority: 1,
         },
         {
             task: "Plan next week’s meal prep",
+            goal: "Build in public",
             category: "Personal",
-            duration: "30m",
+            duration: { hours: 0, minutes: 30, seconds: 0 },
+            selected: false,
             startTime: "13:00",
             completion: 100,
             subtasks: true,
-            priority: 3
+            priority: 3,
         },
         {
             task: "Call with client for onboarding",
+            goal: "Build in public",
             category: "Meetings",
-            duration: "1h",
+            duration: { hours: 1, minutes: 0, seconds: 0 },
+            selected: false,
             startTime: "14:30",
             completion: 0,
             subtasks: false,
-            priority: 2
+            priority: 2,
         },
         {
             task: "Push new features to staging",
+            goal: "Build in public",
             category: "Development",
-            duration: "45m",
+            duration: { hours: 0, minutes: 45, seconds: 0 },
+            selected: false,
             startTime: "16:00",
             completion: 100,
             subtasks: true,
-            priority: 1
+            priority: 1,
         },
         {
             task: "Reply to investor emails",
+            goal: "Build in public",
             category: "Admin",
-            duration: "30m",
+            duration: { hours: 0, minutes: 30, seconds: 0 },
+            selected: false,
             startTime: "17:15",
             completion: 20,
             subtasks: false,
-            priority: 2
+            priority: 2,
         },
         {
             task: "Design v2 of dashboard UI",
+            goal: "Build in public",
             category: "Design",
-            duration: "2h",
+            duration: { hours: 2, minutes: 0, seconds: 0 },
+            selected: false,
             startTime: "18:00",
             completion: 40,
             subtasks: true,
-            priority: 1
+            priority: 1,
         },
         {
             task: "Prepare IG reel script for launch",
+            goal: "Build in public",
             category: "Marketing",
-            duration: "1h",
+            duration: { hours: 1, minutes: 0, seconds: 0 },
+            selected: false,
             startTime: "20:00",
             completion: 90,
             subtasks: true,
-            priority: 3
+            priority: 3,
         },
         {
             task: "Clean up project board on Linear",
+            goal: "Build in public",
             category: "Planning",
-            duration: "20m",
+            duration: { hours: 0, minutes: 20, seconds: 0 },
+            selected: false,
             startTime: "21:30",
             completion: 100,
             subtasks: false,
-            priority: 2
+            priority: 2,
         },
         {
             task: "Evening walk + podcast",
+            goal: "Build in public",
             category: "Wellness",
-            duration: "1h",
+            duration: { hours: 1, minutes: 0, seconds: 0 },
+            selected: false,
             startTime: "22:00",
             completion: 50,
             subtasks: false,
-            priority: 3
-        }
+            priority: 3,
+        },
     ];
+
 
     const [range, setrange] = useState("today");
 
     return (
-        <div className="flex flex-col h-full gap-1">
+        <div className="flex flex-col flex-1 gap-4 overflow-hidden">
             {/* Header Section */}
             <div className="flex justify-between items-center">
                 <span className="text-xl">Today's Tasks</span>
@@ -112,11 +133,12 @@ function TasksContainer() {
             </div>
 
             {/* Scrollable Task List - fills remaining height */}
-            <ScrollArea className="flex-1 overflow-y-auto flex flex-col gap-2 pr-2">
+            <ScrollArea className="overflow-y-auto h-[255px] pr-2">
                 {tasks.map((task, index) => (
                     <Taskcard key={index} {...task} />
                 ))}
             </ScrollArea>
+
         </div>
     );
 }
