@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import BarChartContainer from "@/components/dashboard/barchart-container";
+import DeadlineContainer from "@/components/dashboard/deadline-container";
 import PieChartContainer from "@/components/dashboard/piechart-container";
 import TasksContainer from "@/components/dashboard/tasks-container";
 import TimerContainer from "@/components/dashboard/timer-contaier";
@@ -20,7 +21,7 @@ export default function Page() {
 	return (
 		<>
 			<AppSidebar />
-			<SidebarInset>
+			<SidebarInset className="h-[100vh] md:overflow-hidden">
 				<header className="flex justify-between h-16 w-full shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
 					<div className="flex items-center gap-2 px-4">
 						<SidebarTrigger className="-ml-1" />
@@ -35,23 +36,23 @@ export default function Page() {
 				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
 					{/* Top section - naturally sized (fixed height or content-based) */}
 					<div className="grid auto-rows-min gap-4 md:grid-cols-12">
-						<div className="bg-muted/50 md:col-span-3 rounded-xl md:h-[40vh] p-4" >
+						<div className="bg-muted/50 md:col-span-3 rounded-xl p-4 h-[40vh]" >
 							<TimerContainer />
 						</div>
-						<div className="relative bg-muted/50 md:col-span-4 rounded-xl md:h-[40vh] p-4" >
+						<div className="relative bg-muted/50 md:col-span-4 rounded-xl p-4 h-[40vh]" >
 							<BarChartContainer />
 						</div>
-						<div className="bg-muted/50 md:col-span-3 rounded-xl md:h-[40vh] p-4">
+						<div className="bg-muted/50 md:col-span-3 rounded-xl p-4 h-[40vh]">
 							<PieChartContainer />
 						</div>
-						<div className="bg-muted/50 md:col-span-2 rounded-xl md:h-[40vh]" >
-							
+						<div className="bg-muted/50 md:col-span-2 rounded-xl h-[40vh] p-4" >
+							<DeadlineContainer />
 						</div>
 					</div>
 
 					{/* Bottom section - grows to fill available space */}
-					<div className="grid gap-4 md:grid-cols-12">
-						<div className="bg-muted/50 col-span-3 rounded-xl p-4" >
+					<div className="grid gap-4 md:grid-cols-12 flex-1 overflow-hidden">
+						<div className="bg-muted/50 flex flex-col col-span-3 rounded-xl p-4" >
 							<TasksContainer />
 						</div>
 						<div className="bg-muted/50 col-span-9 rounded-xl" />
