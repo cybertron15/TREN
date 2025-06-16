@@ -53,7 +53,7 @@ export default function Timer({ totalTime, setStats }: Props) {
 
 	return (
 
-		<div className="relative rounded-2xl w-38 aspect-square p-4">
+		<div className="relative rounded-2xl w-[45%] aspect-square p-4">
 			<div
 				style={{
 					background: `

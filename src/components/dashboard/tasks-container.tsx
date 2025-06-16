@@ -133,7 +133,7 @@ function TasksContainer() {
             </div>
 
             {/* Scrollable Task List - fills remaining height */}
-            <ScrollArea className="overflow-y-auto h-[255px] pr-2">
+            <ScrollArea className="overflow-y-auto pr-2 h-[40vh]">
                 {tasks.map((task, index) => (
                     <Taskcard key={index} {...task} />
                 ))}

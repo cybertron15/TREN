@@ -17,9 +17,10 @@ function TimerContainer() {
         seconds: 15
     }
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex h-full flex-col justify-between items-center'>
             <span className='text-2xl'>Workout</span>
             <p className='text-gray-500'>completed {stats.per}%</p>
+
             <Timer totalTime={totalTime} setStats={setstats}/>
             <div className='flex justify-between w-full gap-3'>
                 <div className='grow bg-muted text-center text-xs p-2 rounded-lg'>
