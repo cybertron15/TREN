@@ -1,10 +1,12 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import BarChartContainer from "@/components/dashboard/barchart-container";
+import CalendarView from "@/components/dashboard/calendar";
 import DeadlineContainer from "@/components/dashboard/deadline-container";
 import PieChartContainer from "@/components/dashboard/piechart-container";
 import TasksContainer from "@/components/dashboard/tasks-container";
 import TimerContainer from "@/components/dashboard/timer-contaier";
 import ToggleTheme from "@/components/toggle-theme";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator"
 import {
 	SidebarInset,
@@ -21,7 +23,7 @@ export default function Page() {
 	return (
 		<>
 			<AppSidebar />
-			<SidebarInset className="h-[100vh] md:overflow-hidden">
+			<SidebarInset className="h-[100vh] overflow-hidden">
 				<header className="flex justify-between h-16 w-full shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
 					<div className="flex items-center gap-2 px-4">
 						<SidebarTrigger className="-ml-1" />
@@ -51,11 +53,18 @@ export default function Page() {
 					</div>
 
 					{/* Bottom section - grows to fill available space */}
-					<div className="grid gap-4 md:grid-cols-12 flex-1 overflow-hidden">
-						<div className="bg-muted/50 flex flex-col col-span-3 rounded-xl p-4" >
+					<div className="grid gap-4 md:grid-cols-12 flex-1 w-full">
+						<div className="bg-muted/50 flex flex-col flex-1 md:col-span-3 rounded-xl p-4 w-full" >
 							<TasksContainer />
 						</div>
-						<div className="bg-muted/50 col-span-9 rounded-xl" />
+						<div className="bg-muted/50 md:col-span-9 rounded-xl">
+							<div className="overflow-hidden p-4 rounded-xl h-full">
+								<ScrollArea className="overflow-y-auto h-[45vh] pr-2">
+									<CalendarView />
+								</ScrollArea>
+								
+							</div>
+						</div>
 					</div>
 				</div>
 
