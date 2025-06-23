@@ -174,4 +174,10 @@
     font-family: var(--font-josefin-sans);
     height: 100vh;
   }
+
+  /* diable the box shadow on the sign in card for clerk */
+  .cl-cardBox.cl-signIn-start {
+  box-shadow: none !important;
+} 
 }
+

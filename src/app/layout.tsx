@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import Provider from "@/providers";
-import { ThemeProvider } from "next-themes";
+import { SignedIn } from "@clerk/nextjs";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const josefinSans = Josefin_Sans({
 	variable: "--font-josefin-sans",
@@ -71,7 +72,10 @@ export default function RootLayout({
 				className={`${josefinSans.variable} antialiased`}
 			>
 				<Provider>
-						{children}
+					<SignedIn>
+						<AppSidebar />
+					</SignedIn>
+					{children}
 				</Provider>
 			</body>
 		</html>

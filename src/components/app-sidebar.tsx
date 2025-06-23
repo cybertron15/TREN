@@ -29,22 +29,22 @@ const data = {
   projects: [
     {
       name: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: LayoutDashboard,
     },
     {
       name: "Planner",
-      url: "#",
+      url: "/planner",
       icon: Lightbulb,
     },
     {
       name: "Journal",
-      url: "#",
+      url: "/journal",
       icon: NotebookText,
     },
     {
       name: "Analytics",
-      url: "#",
+      url: "/analytics",
       icon: PieChart,
     },
   ],
