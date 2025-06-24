@@ -1,6 +1,5 @@
 import Header from '@/components/header'
 import { SidebarInset } from '@/components/ui/sidebar'
-import React from 'react'
 
 function page() {
     return (
