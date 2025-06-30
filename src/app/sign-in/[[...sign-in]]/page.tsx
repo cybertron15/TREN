@@ -1,5 +1,5 @@
 "use client";
-import Beams from "@/componenets/Beams/Beams";
+import Beams from "@/components/Beams/Beams";
 import { SignIn } from "@clerk/nextjs";
 import { dark } from '@clerk/themes'
 import { useState } from 'react';

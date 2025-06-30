@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Calendar, dateFnsLocalizer, Event, View } from 'react-big-calendar'
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
@@ -16,7 +16,7 @@ interface CalendarEvent extends Event {
 
 function MyCalendar() {
   const DnDCalendar = withDragAndDrop(Calendar)
-  
+
   // State for current date and view
   const [currentDate, setCurrentDate] = useState<Date>(new Date())
   const [currentView, setCurrentView] = useState<View>('day')
@@ -24,7 +24,7 @@ function MyCalendar() {
   // Memoized localizer configuration
   const { localizer, locales } = useMemo(() => {
     const locales = { 'en-US': enUS }
-    
+
     const localizer = dateFnsLocalizer({
       format,
       parse,
@@ -39,7 +39,7 @@ function MyCalendar() {
   // Memoized events
   const events: CalendarEvent[] = useMemo(() => {
     const today = new Date()
-    
+
     return [
       {
         id: 0,
@@ -80,6 +80,8 @@ function MyCalendar() {
     setCurrentView(newView)
   }, [])
 
+ 
+
   return (
     <div>
       <DnDCalendar
@@ -87,18 +89,21 @@ function MyCalendar() {
         events={events}
         draggableAccessor={draggableAccessor}
         style={calendarStyle}
-        
+        now={() => new Date()}
+
         // Controlled props
         date={currentDate}
         view={currentView}
-        
+
         // Event handlers
         onNavigate={handleNavigate}
         onView={handleViewChange}
-        
+
         // View configuration
         defaultView="day"
         views={views}
+
+        showNowIndicator
       />
     </div>
   )

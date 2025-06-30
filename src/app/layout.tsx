@@ -4,6 +4,7 @@ import "./globals.css";
 import Provider from "@/providers";
 import { SignedIn } from "@clerk/nextjs";
 import { AppSidebar } from "@/components/app-sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 const josefinSans = Josefin_Sans({
 	variable: "--font-josefin-sans",
@@ -76,6 +77,7 @@ export default function RootLayout({
 						<AppSidebar />
 					</SignedIn>
 					{children}
+					<Toaster />
 				</Provider>
 			</body>
 		</html>
